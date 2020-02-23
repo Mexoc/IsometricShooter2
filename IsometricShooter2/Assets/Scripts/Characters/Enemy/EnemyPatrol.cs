@@ -2,38 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyPatrol : MonoBehaviour
+public class EnemyPatrol : EnemyBaseFSM
 {
-    GameObject enemy;
     GameObject[] waypoints;
     int waypointsNumber = 4;
-    float rotationSpeed = 2f;
-    float movementSpeed = 8f;
     int currentWaypoint;
 
-    private void Awake()
+    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        enemy = this.gameObject;
-        SetWayponts();
-    }
-
-    private void Start()
-    {
-        waypoints = GameObject.FindGameObjectsWithTag("Waypoint");
+        base.OnStateEnter(animator, stateInfo, layerIndex);
+        SetWaypoints();        
         currentWaypoint = 0;
     }
 
-    private void Update()
+    private void OnStateUpdate()
     {
-        OnStateUpdate();
+        if (waypoints.Length == 0) return;
+        if (Vector3.Distance(enemy.transform.position, waypoints[currentWaypoint].transform.position) < 2f)
+        {
+            currentWaypoint++;
+            if (currentWaypoint >= waypoints.Length)
+            {
+                currentWaypoint = 0;
+            }
+        }
+        var direction = waypoints[currentWaypoint].transform.position - enemy.transform.position;
+        direction.y = 0;
+        enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, Quaternion.LookRotation(direction), rotSpeed * Time.deltaTime);
+        enemy.transform.Translate(0, 0, speed * Time.deltaTime);
     }
 
-    private void SetWayponts()
+    private void SetWaypoints()
     {
+        if (waypoints != null)
+            return;
         GameObject circle = new GameObject();
         Vector3 pointPos;
         circle.transform.position = new Vector3(enemy.transform.position.x, enemy.transform.position.y + 50, enemy.transform.position.z);
-        for(int i = 0; i < waypointsNumber; i++)
+        for (int i = 0; i < waypointsNumber; i++)
         {
             pointPos = new Vector3(circle.transform.position.x + Random.Range(20, 60), circle.transform.position.y, circle.transform.position.z + Random.Range(20, 60));
             GameObject point = new GameObject();
@@ -50,23 +56,6 @@ public class EnemyPatrol : MonoBehaviour
             Destroy(point);
         }
         Destroy(circle);
-    }
-
-    private void OnStateUpdate()
-    {
-        if (waypoints.Length == 0) return;
-        
-        if (Vector3.Distance(enemy.transform.position, waypoints[currentWaypoint].transform.position) < 2f)
-        {
-            currentWaypoint++;
-            if (currentWaypoint >= waypoints.Length)
-            {
-                currentWaypoint = 0;
-            }
-        }
-        var direction = waypoints[currentWaypoint].transform.position - enemy.transform.position;
-        direction.y = 0;
-        enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, Quaternion.LookRotation(direction), 2f * Time.deltaTime);
-        enemy.transform.Translate(0, 0, movementSpeed * Time.deltaTime);
+        waypoints = GameObject.FindGameObjectsWithTag("Waypoint");
     }
 }

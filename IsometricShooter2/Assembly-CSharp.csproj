@@ -11,7 +11,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{FE81552F-EF95-3B78-3910-BC5202B2E52B}</ProjectGuid>
+    <ProjectGuid>{85D67134-877A-A81A-CEB1-6031F844C077}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -63,37 +63,39 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\CameraMovement.cs" />
+    <Compile Include="Assets\Scripts\Characters\Enemy\EnemyAI.cs" />
+    <Compile Include="Assets\Scripts\Characters\Enemy\EnemyBaseFSM.cs" />
     <Compile Include="Assets\Scripts\Characters\Enemy\EnemyChase.cs" />
     <Compile Include="Assets\Scripts\Characters\Enemy\EnemyPatrol.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\PlayerShoot.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\PlayerTurn.cs" />
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>E:/GitHub Repository/IsometricShooter/IsometricShooter/IsometricShooter/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>E:/GitHub Repository/IsometricShooter/IsometricShooter2/IsometricShooter2/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>E:/GitHub Repository/IsometricShooter/IsometricShooter/IsometricShooter/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>E:/GitHub Repository/IsometricShooter/IsometricShooter2/IsometricShooter2/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>E:/GitHub Repository/IsometricShooter/IsometricShooter/IsometricShooter/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>E:/GitHub Repository/IsometricShooter/IsometricShooter2/IsometricShooter2/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>E:/GitHub Repository/IsometricShooter/IsometricShooter/IsometricShooter/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>E:/GitHub Repository/IsometricShooter/IsometricShooter2/IsometricShooter2/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>E:/GitHub Repository/IsometricShooter/IsometricShooter/IsometricShooter/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>E:/GitHub Repository/IsometricShooter/IsometricShooter2/IsometricShooter2/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>E:/GitHub Repository/IsometricShooter/IsometricShooter/IsometricShooter/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>E:/GitHub Repository/IsometricShooter/IsometricShooter2/IsometricShooter2/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>E:/GitHub Repository/IsometricShooter/IsometricShooter/IsometricShooter/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+      <HintPath>E:/GitHub Repository/IsometricShooter/IsometricShooter2/IsometricShooter2/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>E:/GitHub Repository/IsometricShooter/IsometricShooter/IsometricShooter/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>E:/GitHub Repository/IsometricShooter/IsometricShooter2/IsometricShooter2/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>E:/GitHub Repository/IsometricShooter/IsometricShooter/IsometricShooter/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>E:/GitHub Repository/IsometricShooter/IsometricShooter2/IsometricShooter2/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Editor/2019.3.1f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
