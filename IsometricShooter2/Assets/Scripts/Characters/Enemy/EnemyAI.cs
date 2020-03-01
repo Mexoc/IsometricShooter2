@@ -12,6 +12,21 @@ public class EnemyAI : MonoBehaviour
         return player;
     }
 
+    void Fire()
+    {
+
+    }
+
+    public void StartShooting()
+    {
+        InvokeRepeating("Fire", 1f, 1f);
+    }
+
+    public void StopShooting()
+    {
+        CancelInvoke("Fire");
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,5 +39,5 @@ public class EnemyAI : MonoBehaviour
         if (player == null)
             player = GameObject.FindGameObjectWithTag("Player");
         anim.SetFloat("distance", Vector3.Distance(gameObject.transform.position, player.transform.position));
-    }
+    }    
 }

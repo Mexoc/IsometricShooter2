@@ -10,6 +10,8 @@ public class PlayerShoot : MonoBehaviour
     public GameObject shootingResult;
     private GameObject playerGunBarrel;
     private Vector3 collisionPoint;
+    public Animator playerAnim;
+    private PlayerMovement playerMoveComponent;
 
     private void Awake()
     {
@@ -28,6 +30,12 @@ public class PlayerShoot : MonoBehaviour
         {
             playerGunBarrel = GameObject.FindGameObjectWithTag("GunBarrel");
         }
+        if (playerMoveComponent == null)
+        {
+            playerMoveComponent = gameObject.GetComponent<PlayerMovement>();
+        }
+        if (Input.GetMouseButtonDown(0) && playerMoveComponent.isVerticalMove || playerMoveComponent.isHorizontalMove || playerMoveComponent.isSprint)
+            return;
         if (Input.GetMouseButtonDown(0))
         {
             isPlayerShooting = true;
@@ -35,13 +43,12 @@ public class PlayerShoot : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.collider.gameObject.tag != "Player" && hit.collider.gameObject.tag != "Gun" && hit.collider.gameObject.tag != "PlayerBody" && hit.collider.gameObject.tag != "GunBarrel")
+                if (hit.collider.gameObject.tag != "Player" && hit.collider.gameObject.tag != "Gun" && hit.collider.gameObject.tag != "PlayerBody" && hit.collider.gameObject.tag != "GunBarrel" && hit.collider.gameObject.tag != "PlayerMisc")
                 {
                     Vector3 shootDirection = hit.point - playerGunBarrel.transform.position;
                     RaycastHit gunHit;
                     if (Physics.Raycast(playerGunBarrel.transform.position, shootDirection, out gunHit))
                     {
-                        isPlayerShooting = true;
                         GameObject temp = Instantiate(shootingResult, gunHit.point, Quaternion.identity);
                         Vector3 tempScale = temp.transform.localScale;
                         temp.transform.LookAt(player.transform);
@@ -59,5 +66,12 @@ public class PlayerShoot : MonoBehaviour
         {
             isPlayerShooting = false;
         }
+    }
+
+    private void ShootingAnimationSet()
+    {
+        if (playerAnim == null)
+            playerAnim = gameObject.GetComponent<PlayerMovement>().playerAnim;
+        playerAnim.SetBool("isPlayerShooting", isPlayerShooting);
     }
 }

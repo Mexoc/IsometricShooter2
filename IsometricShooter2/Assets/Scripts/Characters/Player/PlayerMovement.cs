@@ -15,6 +15,10 @@ public class PlayerMovement: MonoBehaviour
     private Vector3 dirHor;
     private bool canJump;
     private GameObject ground;
+    public Animator playerAnim;
+    public bool isHorizontalMove;
+    public bool isVerticalMove;
+    public bool isSprint;
 
     private void Awake()
     {
@@ -23,13 +27,14 @@ public class PlayerMovement: MonoBehaviour
         playerRigidBody = player.GetComponent<Rigidbody>();
         dirVert = Vector3.forward + Vector3.right;
         dirHor = Vector3.forward + Vector3.left;     
-        speed = 2f * Time.deltaTime;
+        speed = 0.4f * Time.deltaTime;
     }
 
     private void Update()
     {
         PlayerMove();
         PlayerSprint();
+        PlayerAnimationSet();
     }
 
     private void PlayerMove()
@@ -51,12 +56,31 @@ public class PlayerMovement: MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            speed += 0.04f;
+            speed += 0.01f;
+            isSprint = true;
         }
         else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
-            speed -= 0.04f;
+            speed -= 0.01f;
+            isSprint = false;
         }
+    }
+
+    private void PlayerAnimationSet()
+    {
+        if (playerAnim == null)
+            playerAnim = gameObject.GetComponent<Animator>();
+        if (horizontal != 0)
+            isHorizontalMove = true;
+        else
+            isHorizontalMove = false;
+        if (vertical != 0)
+            isVerticalMove = true;
+        else
+            isVerticalMove = false;
+        playerAnim.SetBool("isHorizontalMove", isHorizontalMove);
+        playerAnim.SetBool("isVerticalMove", isVerticalMove);
+        playerAnim.SetBool("isSprint", isSprint);
     }
     
 }

@@ -11,7 +11,7 @@ public class PlayerTurn : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("PlayerBody");
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         PlayerCursorLook();
     }
@@ -26,7 +26,7 @@ public class PlayerTurn : MonoBehaviour
             {
                 var temp = hit.point;
                 temp.y = player.transform.position.y;
-                player.transform.LookAt(temp, Vector3.up);
+                player.transform.LookAt(temp);
             }
         }
     }
