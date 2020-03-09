@@ -71,7 +71,7 @@
     <Compile Include="Assets\Scripts\Characters\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\PlayerShoot.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\PlayerTurn.cs" />
-    <None Include="Assets\Prefabs\ManNeko_Assets\Adventurer Blake\Read Me.txt" />
+    <None Include="Assets\Downloads\ManNeko_Assets\Adventurer Blake\Read Me.txt" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>E:/GitHub Repository/IsometricShooter/IsometricShooter2/IsometricShooter2/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

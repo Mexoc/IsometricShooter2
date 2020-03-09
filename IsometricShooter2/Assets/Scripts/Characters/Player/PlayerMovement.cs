@@ -19,6 +19,7 @@ public class PlayerMovement: MonoBehaviour
     public bool isHorizontalMove;
     public bool isVerticalMove;
     public bool isSprint;
+    private float sprintSpeed;
 
     private void Awake()
     {
@@ -27,7 +28,8 @@ public class PlayerMovement: MonoBehaviour
         playerRigidBody = player.GetComponent<Rigidbody>();
         dirVert = Vector3.forward + Vector3.right;
         dirHor = Vector3.forward + Vector3.left;     
-        speed = 0.4f * Time.deltaTime;
+        speed = 1f * Time.deltaTime;
+        sprintSpeed = 0.03f;
     }
 
     private void Update()
@@ -56,12 +58,12 @@ public class PlayerMovement: MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            speed += 0.01f;
+            speed += sprintSpeed;
             isSprint = true;
         }
         else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
-            speed -= 0.01f;
+            speed -= sprintSpeed;
             isSprint = false;
         }
     }

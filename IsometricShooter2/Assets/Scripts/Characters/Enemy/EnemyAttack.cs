@@ -14,9 +14,10 @@ public class EnemyAttack : EnemyBaseFSM
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Vector3 direction = opponent.transform.position - enemy.transform.position;
-        direction.y = 0;
-        enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, Quaternion.LookRotation(direction), rotSpeed * Time.deltaTime);
+        //Vector3 direction = opponent.transform.position - enemy.transform.position;
+        ////direction.y = 0;
+        //enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, Quaternion.LookRotation(direction), rotSpeed * Time.deltaTime);
+        enemy.transform.LookAt(opponent.transform);
     }
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
