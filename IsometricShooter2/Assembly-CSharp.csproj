@@ -68,8 +68,10 @@
     <Compile Include="Assets\Scripts\Characters\Enemy\EnemyBaseFSM.cs" />
     <Compile Include="Assets\Scripts\Characters\Enemy\EnemyChase.cs" />
     <Compile Include="Assets\Scripts\Characters\Enemy\EnemyPatrol.cs" />
+    <Compile Include="Assets\Scripts\Characters\Enemy\EnemyStats.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\PlayerShoot.cs" />
+    <Compile Include="Assets\Scripts\Characters\Player\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\PlayerTurn.cs" />
     <None Include="Assets\Downloads\ManNeko_Assets\Adventurer Blake\Read Me.txt" />
     <Reference Include="Unity.Timeline.Editor">

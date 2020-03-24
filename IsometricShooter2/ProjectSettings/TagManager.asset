@@ -13,6 +13,7 @@ TagManager:
   - Waypoint
   - PlayerMisc
   - GunEnemy
+  - EnemyMisc
   layers:
   - Default
   - TransparentFX

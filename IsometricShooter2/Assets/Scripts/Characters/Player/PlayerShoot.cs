@@ -57,6 +57,10 @@ public class PlayerShoot : MonoBehaviour
                         {
                             temp.transform.localScale = new Vector3(0.02f, 0.02f, 0.02f);
                         }
+                        if (gunHit.collider.gameObject.tag == "Enemy" || gunHit.collider.gameObject.tag == "EnemyMisc")
+                        {
+                            gunHit.collider.gameObject.GetComponent<EnemyStats>().EnemyHealth -= 20;
+                        }
                         Destroy(temp, 1f);
                     }
                 }
