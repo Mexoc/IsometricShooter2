@@ -1,13 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement: MonoBehaviour
 {
     private GameObject player;
     private float horizontal;
     private float vertical;
-    private float speed;
+    [SerializeField]
+    private float currentSpeed;
+    private float baseSpeed;
     private float gravity;
     private float jumpForce;
     private Rigidbody playerRigidBody;
@@ -19,7 +22,6 @@ public class PlayerMovement: MonoBehaviour
     public bool isHorizontalMove;
     public bool isVerticalMove;
     public bool isSprint;
-    private float sprintSpeed;
 
     private void Awake()
     {
@@ -28,12 +30,12 @@ public class PlayerMovement: MonoBehaviour
         playerRigidBody = player.GetComponent<Rigidbody>();
         dirVert = Vector3.forward + Vector3.right;
         dirHor = Vector3.forward + Vector3.left;     
-        speed = 1f * Time.deltaTime;
-        sprintSpeed = 0.03f;
+        baseSpeed = 0.5f * Time.deltaTime;
+        currentSpeed = baseSpeed;
     }
 
     private void Update()
-    {
+    {       
         PlayerMove();
         PlayerSprint();
         PlayerAnimationSet();
@@ -45,26 +47,46 @@ public class PlayerMovement: MonoBehaviour
         vertical = Input.GetAxis("Vertical");
         if (horizontal != 0)
         {
-            player.transform.Translate(-horizontal * dirHor * speed);
+            player.transform.Translate(-horizontal * dirHor * currentSpeed);
         }
         if (vertical != 0)
         {
-            player.transform.Translate(vertical * dirVert * speed);
+            player.transform.Translate(vertical * dirVert * currentSpeed);
         }
         player.transform.Translate(0, gravity, 0);
     } 
 
     private void PlayerSprint()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        var sprintSpeed = 5f * Time.deltaTime;
+        if (Input.GetKey(KeyCode.LeftShift) && (horizontal != 0 || vertical != 0))
         {
-            speed += sprintSpeed;
-            isSprint = true;
-        }
-        else if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            speed -= sprintSpeed;
+            
+            if (player.GetComponent<PlayerStats>().playerStamina <= 0)
+            {
+                player.GetComponent<PlayerStats>().playerStamina = 0;
+                isSprint = false;
+                currentSpeed = baseSpeed;
+                return;
+            }
+            else
+            {
+                isSprint = true;
+                currentSpeed = sprintSpeed;
+                player.GetComponent<PlayerStats>().playerStamina -= Time.deltaTime * 20;
+                player.GetComponent<PlayerStats>().playerStaminaBar.GetComponent<Image>().fillAmount -= Time.deltaTime * 0.2f;
+            }
+        }        
+        else if (Input.GetKey(KeyCode.LeftShift) == false)
+        {            
             isSprint = false;
+            currentSpeed = baseSpeed;
+            if (player.GetComponent<PlayerStats>().playerStamina >= 100)
+            {
+                player.GetComponent<PlayerStats>().playerStamina = 100;
+            }
+            player.GetComponent<PlayerStats>().playerStamina += Time.deltaTime * 40;
+            player.GetComponent<PlayerStats>().playerStaminaBar.GetComponent<Image>().fillAmount += Time.deltaTime * 0.4f;
         }
     }
 
@@ -84,5 +106,4 @@ public class PlayerMovement: MonoBehaviour
         playerAnim.SetBool("isVerticalMove", isVerticalMove);
         playerAnim.SetBool("isSprint", isSprint);
     }
-    
 }

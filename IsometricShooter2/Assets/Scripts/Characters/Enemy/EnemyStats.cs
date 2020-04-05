@@ -14,7 +14,6 @@ public class EnemyStats : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log("Enemy health is "+EnemyHealth);
         EnemyIsDead();
     }
 
@@ -22,7 +21,7 @@ public class EnemyStats : MonoBehaviour
     {
         if (EnemyHealth <= 0)
         {
-            Destroy(gameObject, 1f);
+            Destroy(gameObject);
         }
     }
 }

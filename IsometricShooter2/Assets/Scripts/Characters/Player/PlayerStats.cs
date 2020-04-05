@@ -5,12 +5,19 @@ using UnityEngine;
 public class PlayerStats: MonoBehaviour
 {
     private float playerHealth = 100;
+    public float playerStamina = 100;
+    public GameObject playerHealthBar;
+    public GameObject playerStaminaBar;
     public bool isPlayerDead = false;
     private Animator playerAnim;
 
     private void Start()
     {
         playerAnim = gameObject.GetComponent<Animator>();
+        playerHealth = Mathf.Clamp(playerHealth, 0, 100);
+        playerStamina = Mathf.Clamp(playerStamina, 0, 100);
+        playerHealthBar = GameObject.Find("PlayerHealthBar");
+        playerStaminaBar = GameObject.Find("PlayerStaminaBar");
     }
 
     public float PlayerHealth
@@ -33,6 +40,5 @@ public class PlayerStats: MonoBehaviour
     private void Update()
     {
         PlayerDeath();
-        Debug.Log(PlayerHealth);
     }
 }

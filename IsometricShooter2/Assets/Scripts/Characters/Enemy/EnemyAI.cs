@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class EnemyAI : MonoBehaviour
     public GameObject bulletHole;
     private GameObject gunEnemy;
     private float health;
+    private float damage = 30;
 
     public GameObject GetPlayer()
     {
@@ -30,7 +32,8 @@ public class EnemyAI : MonoBehaviour
             Destroy(temp, 1f);
             if (hit.collider.gameObject.tag == "Player" || hit.collider.gameObject.tag == "Gun" || hit.collider.gameObject.tag == "PlayerBody" || hit.collider.gameObject.tag == "GunBarrel" || hit.collider.gameObject.tag == "PlayerMisc")
             {
-                player.GetComponent<PlayerStats>().PlayerHealth -= 30;
+                player.GetComponent<PlayerStats>().PlayerHealth -= damage;
+                player.GetComponent<PlayerStats>().playerHealthBar.GetComponent<Image>().fillAmount -= damage * 0.01f;
             }
         }
     }
@@ -55,7 +58,7 @@ public class EnemyAI : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {        
+    {     
         anim.SetFloat("distance", Vector3.Distance(gameObject.transform.position, player.transform.position));
     }    
 }
