@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerShoot : MonoBehaviour
 {
@@ -12,15 +13,23 @@ public class PlayerShoot : MonoBehaviour
     private Vector3 collisionPoint;
     public Animator playerAnim;
     private PlayerMovement playerMoveComponent;
+    public bool playerCanShoot;
+    private GameObject bulletDisplay;
+    private int bulletCount;
+    private int maxAmmo;
 
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        playerCanShoot = true;
         canPlayerShoot = false;
+        maxAmmo = 9;
+        bulletCount = maxAmmo;        
     }
 
     void Update()
     {
+        BulletCount();
         PlayerShooting();        
     }    
 
@@ -36,40 +45,45 @@ public class PlayerShoot : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0) && playerMoveComponent.isVerticalMove || playerMoveComponent.isHorizontalMove || playerMoveComponent.isSprint)
             return;
-        if (Input.GetMouseButtonDown(0))
+        if (playerCanShoot)
         {
-            isPlayerShooting = true;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
+            if (Input.GetMouseButtonDown(0))
             {
-                if (hit.collider.gameObject.tag != "Player" && hit.collider.gameObject.tag != "Gun" && hit.collider.gameObject.tag != "PlayerBody" && hit.collider.gameObject.tag != "GunBarrel" && hit.collider.gameObject.tag != "PlayerMisc")
+                isPlayerShooting = true;
+                bulletCount -= 1;
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit))
                 {
-                    Vector3 shootDirection = hit.point - playerGunBarrel.transform.position;
-                    RaycastHit gunHit;
-                    if (Physics.Raycast(playerGunBarrel.transform.position, shootDirection, out gunHit))
+                    if (hit.collider.gameObject.tag != "Player" && hit.collider.gameObject.tag != "Gun" && hit.collider.gameObject.tag != "PlayerBody" && hit.collider.gameObject.tag != "GunBarrel" && hit.collider.gameObject.tag != "PlayerMisc")
                     {
-                        GameObject temp = Instantiate(shootingResult, gunHit.point, Quaternion.identity);
-                        Vector3 tempScale = temp.transform.localScale;
-                        temp.transform.LookAt(player.transform);
-                        temp.transform.SetParent(gunHit.transform, true);
-                        if (gunHit.collider.gameObject.tag == "Ground")
+                        Vector3 shootDirection = hit.point - playerGunBarrel.transform.position;
+                        RaycastHit gunHit;
+                        if (Physics.Raycast(playerGunBarrel.transform.position, shootDirection, out gunHit))
                         {
-                            temp.transform.localScale = new Vector3(0.02f, 0.02f, 0.02f);
+                            GameObject temp = Instantiate(shootingResult, gunHit.point, Quaternion.identity);
+                            Vector3 tempScale = temp.transform.localScale;
+                            temp.transform.LookAt(player.transform);
+                            temp.transform.SetParent(gunHit.transform, true);
+                            if (gunHit.collider.gameObject.tag == "Ground")
+                            {
+                                temp.transform.localScale = new Vector3(0.02f, 0.02f, 0.02f);
+                            }
+                            if (gunHit.collider.gameObject.tag == "Enemy" || gunHit.collider.gameObject.tag == "EnemyMisc")
+                            {
+                                gunHit.collider.gameObject.GetComponent<EnemyStats>().EnemyHealth -= 20;
+                            }
+                            Destroy(temp, 1f);
                         }
-                        if (gunHit.collider.gameObject.tag == "Enemy" || gunHit.collider.gameObject.tag == "EnemyMisc")
-                        {
-                            gunHit.collider.gameObject.GetComponent<EnemyStats>().EnemyHealth -= 20;
-                        }
-                        Destroy(temp, 1f);
                     }
                 }
             }
+            else
+            {
+                isPlayerShooting = false;
+            }
         }
-        else
-        {
-            isPlayerShooting = false;
-        }
+        else return;
     }
 
     private void ShootingAnimationSet()
@@ -77,5 +91,32 @@ public class PlayerShoot : MonoBehaviour
         if (playerAnim == null)
             playerAnim = gameObject.GetComponent<PlayerMovement>().playerAnim;
         playerAnim.SetBool("isPlayerShooting", isPlayerShooting);
+    }
+
+    private void BulletCount()
+    {
+        if (bulletDisplay == null)
+        {
+            bulletDisplay = GameObject.Find("PistolAmmo");
+        }
+        if (bulletCount == 0)
+        {
+            playerCanShoot = false;
+        }
+        else
+        {
+            playerCanShoot = true;
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            StartCoroutine("Reload");
+        }
+        bulletDisplay.GetComponent<Text>().text = bulletCount + "/" + maxAmmo;
+    }
+
+    private IEnumerator Reload()
+    {        
+        yield return new WaitForSeconds(2);
+        bulletCount = maxAmmo;
     }
 }

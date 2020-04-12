@@ -56,6 +56,6 @@ public class EnemyPatrol : EnemyBaseFSM
             Destroy(point);
         }
         Destroy(circle);
-        waypoints = GameObject.FindGameObjectsWithTag("Waypoint");
+        waypoints = GameObject.FindGameObjectsWithTag("Waypoint");        
     }
 }
