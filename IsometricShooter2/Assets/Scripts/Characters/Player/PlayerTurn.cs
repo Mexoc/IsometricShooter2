@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerTurn : MonoBehaviour
 {
     private GameObject player;
+    public Vector3 mousePoint;
 
     private void Awake()
     {
@@ -24,9 +25,12 @@ public class PlayerTurn : MonoBehaviour
         {
             if (hit.collider != null)
             {
-                var temp = hit.point;
-                temp.y = player.transform.position.y;
-                player.transform.LookAt(temp);
+                //var temp = hit.point;
+                //temp.y = player.transform.position.y;
+                //player.transform.LookAt(temp);
+                mousePoint = hit.point;
+                mousePoint.y = player.transform.position.y;
+                player.transform.LookAt(mousePoint);
             }
         }
     }

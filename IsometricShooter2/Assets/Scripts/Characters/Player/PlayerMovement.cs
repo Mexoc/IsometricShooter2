@@ -11,7 +11,7 @@ public class PlayerMovement: MonoBehaviour
     [SerializeField]
     private float currentSpeed;
     private float baseSpeed;
-    private float gravity;
+    private float gravity = -0.001f;
     private float jumpForce;
     private Rigidbody playerRigidBody;
     private Vector3 dirVert;
@@ -22,6 +22,10 @@ public class PlayerMovement: MonoBehaviour
     public bool isHorizontalMove;
     public bool isVerticalMove;
     public bool isSprint;
+    private Vector3 mousePos;
+    private Vector3 mouseVector;
+    private float mouseAngle;
+    private bool isLookingAside;
 
     private void Awake()
     {
@@ -39,6 +43,7 @@ public class PlayerMovement: MonoBehaviour
         PlayerMove();
         PlayerSprint();
         PlayerAnimationSet();
+        PlayerMouseViewAngle();
     }
 
     private void PlayerMove()
@@ -55,6 +60,16 @@ public class PlayerMovement: MonoBehaviour
         }
         player.transform.Translate(0, gravity, 0);
     } 
+
+    private float PlayerMouseViewAngle()
+    {
+        mousePos = gameObject.GetComponent<PlayerTurn>().mousePoint;
+        Vector3 origin = (dirHor * 10000) - player.transform.position;
+        mouseVector = mousePos - player.transform.position;
+        mouseAngle = Vector3.Angle(origin, mouseVector);
+        Debug.Log(mouseAngle);
+        return mouseAngle;
+    }
 
     private void PlayerSprint()
     {
@@ -102,8 +117,15 @@ public class PlayerMovement: MonoBehaviour
             isVerticalMove = true;
         else
             isVerticalMove = false;
+        if ((mouseAngle > 135 && mouseAngle < 180) || (mouseAngle > 0 && mouseAngle < 45))
+        {
+            isLookingAside = true;
+        }
+        else
+            isLookingAside = false;
         playerAnim.SetBool("isHorizontalMove", isHorizontalMove);
         playerAnim.SetBool("isVerticalMove", isVerticalMove);
         playerAnim.SetBool("isSprint", isSprint);
+        playerAnim.SetBool("isLookingAside", isLookingAside);
     }
 }
