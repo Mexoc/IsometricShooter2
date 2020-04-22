@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class EnemyPatrol : EnemyBaseFSM
 {
-    GameObject[] waypoints;
+    private GameObject[] waypoints;
     int waypointsNumber = 4;
     int currentWaypoint;
+    private GameObject waypointsGO;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -17,16 +18,16 @@ public class EnemyPatrol : EnemyBaseFSM
 
     private void OnStateUpdate()
     {
-        if (waypoints.Length == 0) return;
+        if (this.waypoints.Length == 0) return;
         if (Vector3.Distance(enemy.transform.position, waypoints[currentWaypoint].transform.position) < 2f)
         {
             currentWaypoint++;
-            if (currentWaypoint >= waypoints.Length)
+            if (currentWaypoint >= this.waypoints.Length)
             {
                 currentWaypoint = 0;
             }
         }
-        var direction = waypoints[currentWaypoint].transform.position - enemy.transform.position;
+        var direction = this.waypoints[currentWaypoint].transform.position - enemy.transform.position;
         direction.y = 0;
         enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, Quaternion.LookRotation(direction), rotSpeed * Time.deltaTime);
         enemy.transform.Translate(0, 0, speed * Time.deltaTime);
@@ -34,8 +35,9 @@ public class EnemyPatrol : EnemyBaseFSM
 
     private void SetWaypoints()
     {
-        if (waypoints != null)
+        if (this.waypoints != null)
             return;
+        waypointsGO = GameObject.Find("waypointsGO");
         GameObject circle = new GameObject();
         Vector3 pointPos;
         circle.transform.position = new Vector3(enemy.transform.position.x, enemy.transform.position.y + 50, enemy.transform.position.z);
@@ -52,10 +54,11 @@ public class EnemyPatrol : EnemyBaseFSM
                 waypoint.name = "waypoint" + (i + 1);
                 waypoint.transform.position = hit.point;
                 waypoint.tag = "Waypoint";
+                waypoint.transform.parent = waypointsGO.transform;
             }
             Destroy(point);
         }
         Destroy(circle);
-        waypoints = GameObject.FindGameObjectsWithTag("Waypoint");        
+        this.waypoints = GameObject.FindGameObjectsWithTag("Waypoint"); 
     }
 }

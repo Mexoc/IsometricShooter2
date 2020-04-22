@@ -8,8 +8,8 @@ public class CameraMovement : MonoBehaviour
     private GameObject player;
     private Vector3 playerPos;
     private Vector3 mainCameraPos;
-    private Vector3 cameraCenter = new Vector3(-35, 50, -35);
-    private Quaternion cameraRotation = Quaternion.Euler(45, 45, 0);
+    public Vector3 cameraCenter = new Vector3(-35, 50, -35);
+    public Quaternion cameraRotation = Quaternion.Euler(45, 45, 0);
 
     void Start()
     {

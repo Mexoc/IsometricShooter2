@@ -15,6 +15,7 @@ TagManager:
   - GunEnemy
   - EnemyMisc
   - UI
+  - MiniMap
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - MiniMap
   - 
   - 
   - 
