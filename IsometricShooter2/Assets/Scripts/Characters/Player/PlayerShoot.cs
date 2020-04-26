@@ -17,6 +17,7 @@ public class PlayerShoot : MonoBehaviour
     private GameObject bulletDisplay;
     private int bulletCount;
     private int maxAmmo;
+    private LineRenderer bulletTraceLine;
 
     private void Awake()
     {
@@ -24,7 +25,8 @@ public class PlayerShoot : MonoBehaviour
         playerCanShoot = true;
         canPlayerShoot = false;
         maxAmmo = 9;
-        bulletCount = maxAmmo;        
+        bulletCount = maxAmmo;
+        
     }
 
     void Update()
@@ -54,13 +56,19 @@ public class PlayerShoot : MonoBehaviour
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit))
-                {
+                {                    
                     if (hit.collider.gameObject.tag != "Player" && hit.collider.gameObject.tag != "Gun" && hit.collider.gameObject.tag != "PlayerBody" && hit.collider.gameObject.tag != "GunBarrel" && hit.collider.gameObject.tag != "PlayerMisc")
                     {
                         Vector3 shootDirection = hit.point - playerGunBarrel.transform.position;
-                        RaycastHit gunHit;
+                        RaycastHit gunHit;                               
                         if (Physics.Raycast(playerGunBarrel.transform.position, shootDirection, out gunHit))
                         {
+                            bulletTraceLine = gameObject.AddComponent<LineRenderer>();
+                            bulletTraceLine.startWidth = 0.015f;
+                            bulletTraceLine.material.color = Color.blue;
+                            bulletTraceLine.SetPosition(0, playerGunBarrel.transform.position);
+                            bulletTraceLine.SetPosition(1, gunHit.point);
+                            StartCoroutine("BulletLineTraceDisappear");
                             GameObject temp = Instantiate(shootingResult, gunHit.point, Quaternion.identity);
                             Vector3 tempScale = temp.transform.localScale;
                             temp.transform.LookAt(player.transform);
@@ -71,6 +79,8 @@ public class PlayerShoot : MonoBehaviour
                             }
                             if (gunHit.collider.gameObject.tag == "Enemy" || gunHit.collider.gameObject.tag == "EnemyMisc")
                             {
+                                gunHit.collider.gameObject.GetComponent<EnemyAI>().enemyIsShotAt = true;
+                                Debug.Log(gunHit.collider.gameObject.tag as string);
                                 gunHit.collider.gameObject.GetComponent<EnemyStats>().EnemyHealth -= 20;
                             }
                             Destroy(temp, 1f);
@@ -118,5 +128,11 @@ public class PlayerShoot : MonoBehaviour
     {        
         yield return new WaitForSeconds(2);
         bulletCount = maxAmmo;
+    }
+
+    private IEnumerator BulletLineTraceDisappear()
+    {
+        yield return new WaitForSeconds(0.05f);
+        Destroy(gameObject.GetComponent<LineRenderer>());
     }
 }

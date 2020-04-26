@@ -11,6 +11,7 @@ public class EnemyPatrol : EnemyBaseFSM
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        animator.gameObject.GetComponent<EnemyAI>().enemyIsShotAt = false;
         base.OnStateEnter(animator, stateInfo, layerIndex);
         SetWaypoints();        
         currentWaypoint = 0;
@@ -18,7 +19,6 @@ public class EnemyPatrol : EnemyBaseFSM
 
     private void OnStateUpdate()
     {
-        if (this.waypoints.Length == 0) return;
         if (Vector3.Distance(enemy.transform.position, waypoints[currentWaypoint].transform.position) < 2f)
         {
             currentWaypoint++;
@@ -47,7 +47,7 @@ public class EnemyPatrol : EnemyBaseFSM
             GameObject point = new GameObject();
             point.transform.position = pointPos;
             RaycastHit hit;
-            Physics.Raycast(point.transform.position, Vector3.down * 100, out hit);
+            Physics.Raycast(point.transform.position, Vector3.down * 1000, out hit);
             if (hit.collider.tag == "Ground")
             {
                 GameObject waypoint = new GameObject();

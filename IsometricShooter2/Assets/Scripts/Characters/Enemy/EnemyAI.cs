@@ -11,6 +11,8 @@ public class EnemyAI : MonoBehaviour
     private GameObject gunEnemy;
     private float health;
     private float damage = 30;
+    private LineRenderer enemyShootTrace;
+    public bool enemyIsShotAt = false;
 
     public GameObject GetPlayer()
     {
@@ -26,7 +28,13 @@ public class EnemyAI : MonoBehaviour
         RaycastHit hit;
         Physics.Raycast(gunEnemy.transform.position, dir, out hit);
         if (hit.collider != null)
-        {            
+        {
+            enemyShootTrace = gameObject.AddComponent<LineRenderer>();
+            enemyShootTrace.startWidth = 0.015f;
+            enemyShootTrace.material.color = Color.red;
+            enemyShootTrace.SetPosition(0, gunEnemy.transform.position);
+            enemyShootTrace.SetPosition(1, playerPos);
+            StartCoroutine("EnemyShootTraceRemove");
             var temp = Instantiate(bulletHole, hit.point, Quaternion.identity);
             temp.transform.SetParent(hit.collider.transform);
             Destroy(temp, 1f);
@@ -60,5 +68,12 @@ public class EnemyAI : MonoBehaviour
     void Update()
     {     
         anim.SetFloat("distance", Vector3.Distance(gameObject.transform.position, player.transform.position));
+        anim.SetBool("enemyIsShotAt", enemyIsShotAt);
     }    
+
+    private IEnumerator EnemyShootTraceRemove()
+    {
+        yield return new WaitForSeconds(0.05f);
+        Destroy(gameObject.GetComponent<LineRenderer>());
+    }
 }
