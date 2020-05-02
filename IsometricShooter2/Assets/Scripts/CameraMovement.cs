@@ -10,6 +10,7 @@ public class CameraMovement : MonoBehaviour
     private Vector3 mainCameraPos;
     public Vector3 cameraCenter = new Vector3(-35, 50, -35);
     public Quaternion cameraRotation = Quaternion.Euler(45, 45, 0);
+    private Color RayHitObjectColor;
 
     void Start()
     {

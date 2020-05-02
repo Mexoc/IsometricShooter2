@@ -67,7 +67,6 @@ public class PlayerMovement: MonoBehaviour
         Vector3 origin = (dirHor * 10000) - player.transform.position;
         mouseVector = mousePos - player.transform.position;
         mouseAngle = Vector3.Angle(origin, mouseVector);
-        Debug.Log(mouseAngle);
         return mouseAngle;
     }
 
