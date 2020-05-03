@@ -16,6 +16,7 @@ TagManager:
   - EnemyMisc
   - UI
   - MiniMap
+  - Environment
   layers:
   - Default
   - TransparentFX

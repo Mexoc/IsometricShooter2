@@ -30,6 +30,7 @@ public class PlayerStats: MonoBehaviour
     {        
         if (PlayerHealth <= 0)
         {
+            isPlayerDead = true;
             playerAnim.SetBool("isPlayerDead", true);
             Destroy(gameObject.GetComponent<PlayerTurn>());
             Destroy(gameObject.GetComponent<PlayerMovement>());

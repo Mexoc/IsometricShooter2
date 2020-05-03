@@ -5,11 +5,18 @@ using UnityEngine;
 public class EnemyStats : MonoBehaviour
 {
     private float enemyHealth = 100;
+    public float enemyAmmo = 25;
+    public float currentAmmo;
 
     public float EnemyHealth
     {
         get { return enemyHealth; }
         set { enemyHealth = value; }
+    }
+
+    private void Start()
+    {
+        currentAmmo = enemyAmmo;
     }
 
     private void Update()

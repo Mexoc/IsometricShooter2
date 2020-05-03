@@ -24,10 +24,7 @@ public class PlayerTurn : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             if (hit.collider != null)
-            {
-                //var temp = hit.point;
-                //temp.y = player.transform.position.y;
-                //player.transform.LookAt(temp);
+            {               
                 mousePoint = hit.point;
                 mousePoint.y = player.transform.position.y;
                 player.transform.LookAt(mousePoint);

@@ -13,6 +13,9 @@ public class EnemyAI : MonoBehaviour
     private float damage = 30;
     private LineRenderer enemyShootTrace;
     public bool enemyIsShotAt = false;
+    private float currentAmmo;
+    private float enemyAmmo;
+    private bool isPlayerDead;
 
     public GameObject GetPlayer()
     {
@@ -21,6 +24,8 @@ public class EnemyAI : MonoBehaviour
 
     void Fire()
     {
+        PlayerDeathCheck();
+        AmmoCheck();
         gunEnemy = gameObject.transform.Find("gunEnemyPos").gameObject;
         Vector3 playerPos = player.transform.position;
         playerPos.y += 2;
@@ -29,7 +34,10 @@ public class EnemyAI : MonoBehaviour
         Physics.Raycast(gunEnemy.transform.position, dir, out hit);
         if (hit.collider != null)
         {
-            enemyShootTrace = gameObject.AddComponent<LineRenderer>();
+            if (enemyShootTrace == null)
+            {
+                enemyShootTrace = gameObject.AddComponent<LineRenderer>();
+            }            
             enemyShootTrace.startWidth = 0.015f;
             enemyShootTrace.material.color = Color.red;
             enemyShootTrace.SetPosition(0, gunEnemy.transform.position);
@@ -62,6 +70,8 @@ public class EnemyAI : MonoBehaviour
         anim = gameObject.GetComponent<Animator>();  
         player = GameObject.FindGameObjectWithTag("Player");
         health = gameObject.GetComponent<EnemyStats>().EnemyHealth;
+        enemyAmmo = gameObject.GetComponent<EnemyStats>().enemyAmmo;
+        currentAmmo = gameObject.GetComponent<EnemyStats>().currentAmmo;
     }
 
     // Update is called once per frame
@@ -75,5 +85,34 @@ public class EnemyAI : MonoBehaviour
     {
         yield return new WaitForSeconds(0.05f);
         Destroy(gameObject.GetComponent<LineRenderer>());
+    }
+
+    private IEnumerator EnemyReload()
+    {
+        StopShooting();
+        yield return new WaitForSeconds(2f);
+        currentAmmo = enemyAmmo;
+        StartShooting();
+    }
+
+    private void AmmoCheck()
+    {              
+        if (currentAmmo > 0)
+        {
+        currentAmmo -= 1;
+        }
+        else
+        {
+            StartCoroutine("EnemyReload");
+        }
+    }
+
+    private void PlayerDeathCheck()
+    {
+        isPlayerDead = player.GetComponent<PlayerStats>().isPlayerDead;
+        if (isPlayerDead)
+        {
+            StopShooting();
+        }
     }
 }
