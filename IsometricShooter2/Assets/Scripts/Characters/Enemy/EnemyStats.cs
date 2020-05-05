@@ -7,6 +7,8 @@ public class EnemyStats : MonoBehaviour
     private float enemyHealth = 100;
     public float enemyAmmo = 25;
     public float currentAmmo;
+    public bool enemyIsDead = false;
+    private Animator anim;
 
     public float EnemyHealth
     {
@@ -21,14 +23,24 @@ public class EnemyStats : MonoBehaviour
 
     private void Update()
     {
-        EnemyIsDead();
+        EnemyDead();
     }
 
-    public void EnemyIsDead()
+    public void EnemyDead()
     {
-        if (EnemyHealth <= 0)
+        if (enemyHealth <= 0)
         {
-            Destroy(gameObject);
+            GameObject temp;
+            enemyIsDead = true;
+            Vector3 tempRot = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, 90);
+            Destroy(gameObject.GetComponent<Rigidbody>());
+            Destroy(gameObject.GetComponent<EnemyAI>());
+            Destroy(gameObject.GetComponent<EnemyStats>());
+            gameObject.GetComponent<Animator>().enabled = false;
+            temp = gameObject.transform.Find("minimapIcon").gameObject;
+            temp.SetActive(false);
+            gameObject.tag = "Untagged";
+            gameObject.transform.eulerAngles = tempRot;            
         }
     }
 }

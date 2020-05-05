@@ -9,13 +9,14 @@ public class EnemyAI : MonoBehaviour
     public GameObject player;
     public GameObject bulletHole;
     private GameObject gunEnemy;
-    private float health;
     private float damage = 30;
     private LineRenderer enemyShootTrace;
-    public bool enemyIsShotAt = false;
+    public bool enemyIsShotAt;
     private float currentAmmo;
     private float enemyAmmo;
     private bool isPlayerDead;
+    private bool enemyIsDead;
+    private float enemyHealth;
 
     public GameObject GetPlayer()
     {
@@ -69,16 +70,18 @@ public class EnemyAI : MonoBehaviour
     {
         anim = gameObject.GetComponent<Animator>();  
         player = GameObject.FindGameObjectWithTag("Player");
-        health = gameObject.GetComponent<EnemyStats>().EnemyHealth;
+        enemyHealth = gameObject.GetComponent<EnemyStats>().EnemyHealth;
         enemyAmmo = gameObject.GetComponent<EnemyStats>().enemyAmmo;
         currentAmmo = gameObject.GetComponent<EnemyStats>().currentAmmo;
+        enemyIsDead = gameObject.GetComponent<EnemyStats>().enemyIsDead;
+        enemyIsShotAt = false;
     }
 
     // Update is called once per frame
-    void Update()
-    {     
+    void LateUpdate()
+    {                   
         anim.SetFloat("distance", Vector3.Distance(gameObject.transform.position, player.transform.position));
-        anim.SetBool("enemyIsShotAt", enemyIsShotAt);
+        anim.SetBool("enemyIsShotAt", enemyIsShotAt);        
     }    
 
     private IEnumerator EnemyShootTraceRemove()

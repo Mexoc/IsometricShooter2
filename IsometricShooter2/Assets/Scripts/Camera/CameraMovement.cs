@@ -49,7 +49,5 @@ public class CameraMovement : MonoBehaviour
             rayHitObjectColor.a = 0;
             temp.GetComponent<Renderer>().material.color = rayHitObjectColor;            
         }
-        Debug.Log("distance from player to camera = " + distancePlayerCamera + "; distance temp = " + distanceTempCamera);
-        //Debug.Log(temp.tag);
     }
 }
