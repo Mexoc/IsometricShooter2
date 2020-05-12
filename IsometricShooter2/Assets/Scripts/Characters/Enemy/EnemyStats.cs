@@ -36,6 +36,7 @@ public class EnemyStats : MonoBehaviour
             Destroy(gameObject.GetComponent<Rigidbody>());
             Destroy(gameObject.GetComponent<EnemyAI>());
             Destroy(gameObject.GetComponent<EnemyStats>());
+            Destroy(gameObject.GetComponent<LineRenderer>());
             gameObject.GetComponent<Animator>().enabled = false;
             temp = gameObject.transform.Find("minimapIcon").gameObject;
             temp.SetActive(false);
