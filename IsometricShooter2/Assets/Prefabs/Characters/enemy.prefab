@@ -868,6 +868,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyAmmo: 25
   currentAmmo: 0
+  enemyIsDead: 0
 --- !u!1 &4808980787484213869
 GameObject:
   m_ObjectHideFlags: 0

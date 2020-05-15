@@ -17,6 +17,7 @@ public class EnemyAI : MonoBehaviour
     private bool isPlayerDead;
     private bool enemyIsDead;
     private float enemyHealth;
+    private float angle;
 
     public GameObject GetPlayer()
     {
@@ -81,7 +82,9 @@ public class EnemyAI : MonoBehaviour
     void LateUpdate()
     {                   
         anim.SetFloat("distance", Vector3.Distance(gameObject.transform.position, player.transform.position));
-        anim.SetBool("enemyIsShotAt", enemyIsShotAt);        
+        anim.SetBool("enemyIsShotAt", enemyIsShotAt);
+        anim.SetFloat("playerInSightAngle", PlayerInSightAngle());
+        anim.SetBool("isPlayerVisible", IsPlayerVisible());
     }    
 
     private IEnumerator EnemyShootTraceRemove()
@@ -117,5 +120,29 @@ public class EnemyAI : MonoBehaviour
         {
             StopShooting();
         }
+    }
+
+    private float PlayerInSightAngle()
+    {
+        Vector3 playerDir = player.transform.position - this.transform.position;
+        angle = Vector3.Angle(playerDir, this.transform.forward);
+        return angle;
+    }
+
+    private bool IsPlayerVisible()
+    {
+        RaycastHit hit;
+        Ray ray = new Ray(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y+2, gameObject.transform.position.z), gameObject.transform.forward*50);    
+        if (Physics.Raycast(ray, out hit, 50) == false)
+        {
+            return false;
+        }
+        else 
+            if (hit.collider.gameObject.tag == "Player" || hit.collider.gameObject.tag == "Gun" || hit.collider.gameObject.tag == "PlayerBody" || hit.collider.gameObject.tag == "GunBarrel" || hit.collider.gameObject.tag == "PlayerMisc")
+            {
+                return true;
+            }
+            else
+                return false;        
     }
 }
