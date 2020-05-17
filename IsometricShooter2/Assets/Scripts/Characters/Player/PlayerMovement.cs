@@ -32,9 +32,9 @@ public class PlayerMovement: MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         ground = GameObject.FindGameObjectWithTag("Ground");
         playerRigidBody = player.GetComponent<Rigidbody>();
-        dirVert = Vector3.forward + Vector3.right;
-        dirHor = Vector3.forward + Vector3.left;     
-        baseSpeed = 2f * Time.deltaTime;
+        dirVert = Vector3.forward + Vector3.right;        
+        dirHor = Vector3.forward + Vector3.left;        
+        baseSpeed = 0.75f * Time.deltaTime;
         currentSpeed = baseSpeed;
     }
 
@@ -43,7 +43,6 @@ public class PlayerMovement: MonoBehaviour
         PlayerMove();
         PlayerSprint();
         PlayerAnimationSet();
-        PlayerMouseViewAngle();
     }
 
     private void PlayerMove()
@@ -52,23 +51,14 @@ public class PlayerMovement: MonoBehaviour
         vertical = Input.GetAxis("Vertical");
         if (horizontal != 0)
         {
-            player.transform.Translate(-horizontal * dirHor * currentSpeed);
+            player.transform.Translate(-horizontal * dirHor * currentSpeed, Space.World);
         }
         if (vertical != 0)
         {
-            player.transform.Translate(vertical * dirVert * currentSpeed);
+            player.transform.Translate(vertical * dirVert * currentSpeed, Space.World);
         }
         player.transform.Translate(0, gravity, 0);
     } 
-
-    private float PlayerMouseViewAngle()
-    {
-        mousePos = gameObject.GetComponent<PlayerTurn>().mousePoint;
-        Vector3 origin = (dirHor * 10000) - player.transform.position;
-        mouseVector = mousePos - player.transform.position;
-        mouseAngle = Vector3.Angle(origin, mouseVector);
-        return mouseAngle;
-    }
 
     private void PlayerSprint()
     {

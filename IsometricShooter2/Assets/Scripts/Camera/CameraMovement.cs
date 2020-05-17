@@ -8,14 +8,16 @@ public class CameraMovement : MonoBehaviour
     private GameObject player;
     private Vector3 playerPos;
     private Vector3 mainCameraPos;
-    public Vector3 cameraCenter = new Vector3(-35, 50, -35);
-    public Quaternion cameraRotation = Quaternion.Euler(45, 45, 0);
+    public Vector3 cameraCenter;
+    public Quaternion cameraRotation;
     private Color rayHitObjectColor;
 
     void Start()
     {
-        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-        player = GameObject.FindGameObjectWithTag("Player");
+        cameraCenter = new Vector3(-35, 50, -35);      
+        cameraRotation = Quaternion.Euler(45, 45, 0);
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");         
+        player = GameObject.FindGameObjectWithTag("Player");        
     }
 
     void Update()
@@ -27,6 +29,7 @@ public class CameraMovement : MonoBehaviour
     private void CameraUpdate()
     {
         playerPos = player.transform.position;
+        mainCamera.transform.LookAt(player.transform);
         mainCameraPos = playerPos + cameraCenter;
         mainCamera.transform.rotation = cameraRotation;
         mainCamera.transform.position = mainCameraPos;
