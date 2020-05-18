@@ -6,7 +6,7 @@ public class CameraObstaclesTransparency : MonoBehaviour
 {
     private GameObject player;
     private Color rayHitObjectColor;
-    private GameObject[] environments;
+    private List<GameObject> environments = new List<GameObject>();
 
     void Start()
     {
@@ -15,10 +15,6 @@ public class CameraObstaclesTransparency : MonoBehaviour
 
     void Update()
     {
-        if (environments == null)
-        {
-            environments = GameObject.FindGameObjectsWithTag("Environment");
-        }
         CameraObstaclesTransparent();
     }
 
@@ -29,20 +25,28 @@ public class CameraObstaclesTransparency : MonoBehaviour
         GameObject temp;
         Physics.Raycast(ray, out hit);
         temp = hit.collider.gameObject;
-        if (temp.tag == "Environment")
+        if (temp.tag != "Environment" )
         {
-            rayHitObjectColor = temp.GetComponent<Renderer>().material.color;
-            rayHitObjectColor.a = 0;
-            temp.GetComponent<Renderer>().material.color = rayHitObjectColor;
+            if (environments == null)
+            {
+                return;
+            }
+            else
+            {
+                foreach (GameObject obj in environments)
+                {
+                    rayHitObjectColor = obj.GetComponent<MeshRenderer>().material.color;
+                    rayHitObjectColor.a = 1;
+                    obj.GetComponent<MeshRenderer>().material.color = rayHitObjectColor;
+                }
+            }
         }
         else
         {
-            foreach (GameObject obj in environments)
-            {
-                rayHitObjectColor = obj.GetComponent<Renderer>().material.color;
-                rayHitObjectColor.a = 1;
-                obj.GetComponent<Renderer>().material.color = rayHitObjectColor;
-            }
+            environments.Add(temp);
+            rayHitObjectColor = temp.GetComponent<MeshRenderer>().material.color;
+            rayHitObjectColor.a = 0.25f;
+            temp.GetComponent<MeshRenderer>().material.color = rayHitObjectColor;
         }
     }
 }

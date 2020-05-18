@@ -42,6 +42,7 @@ public class PlayerMovement: MonoBehaviour
     {       
         PlayerMove();
         PlayerSprint();
+        PlayerMouseViewAngle();
         PlayerAnimationSet();
     }
 
@@ -92,6 +93,15 @@ public class PlayerMovement: MonoBehaviour
             player.GetComponent<PlayerStats>().playerStamina += Time.deltaTime * 40;
             player.GetComponent<PlayerStats>().playerStaminaBar.GetComponent<Image>().fillAmount += Time.deltaTime * 0.4f;
         }
+    }
+
+    private float PlayerMouseViewAngle()
+    {
+        mousePos = gameObject.GetComponent<PlayerTurn>().mousePoint;
+        Vector3 origin = (dirHor * 10000) - player.transform.position;
+        mouseVector = mousePos - player.transform.position;
+        mouseAngle = Vector3.Angle(origin, mouseVector);
+        return mouseAngle;
     }
 
     private void PlayerAnimationSet()
