@@ -48,6 +48,10 @@ public class PlayerShoot : MonoBehaviour
         if (bulletTraceLine == null)
         {
             bulletTraceLine = gameObject.AddComponent<LineRenderer>();
+            bulletTraceLine.startColor = Color.blue;
+            bulletTraceLine.endColor = Color.blue;
+            bulletTraceLine.material.color = Color.blue;
+            bulletTraceLine.startWidth = 0.015f;
         }
         if (Input.GetMouseButtonDown(0) && playerMoveComponent.isVerticalMove || playerMoveComponent.isHorizontalMove || playerMoveComponent.isSprint)
             return;
@@ -66,9 +70,7 @@ public class PlayerShoot : MonoBehaviour
                         Vector3 shootDirection = hit.point - playerGunBarrel.transform.position;
                         RaycastHit gunHit;                               
                         if (Physics.Raycast(playerGunBarrel.transform.position, shootDirection, out gunHit))
-                        {
-                            bulletTraceLine.startWidth = 0.015f;
-                            bulletTraceLine.material.color = Color.blue;
+                        {                                                     
                             bulletTraceLine.SetPosition(0, playerGunBarrel.transform.position);
                             bulletTraceLine.SetPosition(1, gunHit.point);
                             StartCoroutine("BulletLineTraceDisappear");

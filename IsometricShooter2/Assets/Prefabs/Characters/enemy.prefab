@@ -869,6 +869,7 @@ MonoBehaviour:
   enemyAmmo: 25
   currentAmmo: 0
   enemyIsDead: 0
+  keycard: {fileID: 7456476135192224721, guid: d0693a4e243f6a141a59e1e285cb2a9c, type: 3}
 --- !u!1 &4808980787484213869
 GameObject:
   m_ObjectHideFlags: 0

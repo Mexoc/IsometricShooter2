@@ -9,6 +9,8 @@ public class EnemyStats : MonoBehaviour
     public float currentAmmo;
     public bool enemyIsDead = false;
     private Animator anim;
+    [SerializeField]
+    private GameObject keycard;
 
     public float EnemyHealth
     {
@@ -35,13 +37,21 @@ public class EnemyStats : MonoBehaviour
             Vector3 tempRot = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, 90);
             Destroy(gameObject.GetComponent<Rigidbody>());
             Destroy(gameObject.GetComponent<EnemyAI>());
-            Destroy(gameObject.GetComponent<EnemyStats>());
             Destroy(gameObject.GetComponent<LineRenderer>());
+            gameObject.GetComponent<CapsuleCollider>().isTrigger = true;
             gameObject.GetComponent<Animator>().enabled = false;
             temp = gameObject.transform.Find("minimapIcon").gameObject;
             temp.SetActive(false);
             gameObject.tag = "Untagged";
             gameObject.transform.eulerAngles = tempRot;            
+        }
+    }
+
+    public void DropKeycard()
+    {
+        if (this.enemyIsDead)
+        {
+            Instantiate(keycard, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y+1, gameObject.transform.position.z), Quaternion.identity);
         }
     }
 }
