@@ -21,7 +21,7 @@ public class KeyCardDrop : MonoBehaviour
 
     private GameObject EnemyWithKeyCard(GameObject[] enemies)
     {
-        int num = Random.Range(0, enemies.Length-1);
+        int num = Random.Range(0, enemies.Length);
         return enemies[num];
     }
 

@@ -10,6 +10,7 @@ public class PlayerStats: MonoBehaviour
     public GameObject playerStaminaBar;
     public bool isPlayerDead = false;
     private Animator playerAnim;
+    public bool isKeycardLooted;
 
     private void Start()
     {
@@ -18,6 +19,7 @@ public class PlayerStats: MonoBehaviour
         playerStamina = Mathf.Clamp(playerStamina, 0, 100);
         playerHealthBar = GameObject.Find("PlayerHealthBar");
         playerStaminaBar = GameObject.Find("PlayerStaminaBar");
+        isKeycardLooted = false;
     }
 
     public float PlayerHealth

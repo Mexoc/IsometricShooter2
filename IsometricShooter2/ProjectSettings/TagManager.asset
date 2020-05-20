@@ -17,6 +17,7 @@ TagManager:
   - UI
   - MiniMap
   - Environment
+  - Keycard
   layers:
   - Default
   - TransparentFX
