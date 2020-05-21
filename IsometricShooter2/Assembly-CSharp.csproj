@@ -76,7 +76,10 @@
     <Compile Include="Assets\Scripts\Characters\Player\PlayerTurn.cs" />
     <Compile Include="Assets\Scripts\Items\KeyCardDrop.cs" />
     <Compile Include="Assets\Scripts\Items\KeycardLoot.cs" />
-    <Compile Include="Assets\Scripts\MiniMap\MinimapCameraMovement.cs" />
+    <Compile Include="Assets\Scripts\LevelCompleteTrigger.cs" />
+    <Compile Include="Assets\Scripts\UI\MapToggle\MapToggle.cs" />
+    <Compile Include="Assets\Scripts\UI\MiniMap\MinimapCameraMovement.cs" />
+    <None Include="Assets\Downloads\Military Vehicle\Humvee Info.txt" />
     <None Include="Assets\Downloads\ManNeko_Assets\Adventurer Blake\Read Me.txt" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>E:/GitHub Repository/IsometricShooter/IsometricShooter2/IsometricShooter2/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

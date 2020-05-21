@@ -7,7 +7,14 @@ public class KeyCardDrop : MonoBehaviour
     private GameObject[] enemies;
     private GameObject enemyWithKeyCard;
     private bool iskeycardDropped = false;
-    
+    private GameObject keycardImageUI;
+
+    private void Awake()
+    {
+        keycardImageUI = GameObject.Find("keycardImage");
+        keycardImageUI.SetActive(false);
+    }
+
     void Start()
     {
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -17,6 +24,7 @@ public class KeyCardDrop : MonoBehaviour
     void LateUpdate()
     {
         KeyCardDropCheck();
+        KeycardUICheck();
     }
 
     private GameObject EnemyWithKeyCard(GameObject[] enemies)
@@ -33,6 +41,14 @@ public class KeyCardDrop : MonoBehaviour
         {
             enemyWithKeyCard.GetComponent<EnemyStats>().DropKeycard();
             iskeycardDropped = true;
+        }
+    }
+
+    private void KeycardUICheck()
+    {
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>().isKeycardLooted)
+        {
+            keycardImageUI.SetActive(true);
         }
     }
 }
