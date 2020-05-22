@@ -17,7 +17,7 @@ public class EnemyAI : MonoBehaviour
     private bool isPlayerDead;
     private bool enemyIsDead;
     private float enemyHealth;
-    private float angle;
+    private float angle;    
 
     public GameObject GetPlayer()
     {
@@ -28,6 +28,7 @@ public class EnemyAI : MonoBehaviour
     {
         PlayerDeathCheck();
         AmmoCheck();
+        gameObject.GetComponent<AudioSource>().Play();
         gunEnemy = gameObject.transform.Find("gunEnemyPos").gameObject;
         Vector3 playerPos = player.transform.position;
         playerPos.y += 2;
