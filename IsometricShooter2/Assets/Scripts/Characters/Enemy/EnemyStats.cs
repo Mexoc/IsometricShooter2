@@ -8,9 +8,11 @@ public class EnemyStats : MonoBehaviour
     public float enemyAmmo = 25;
     public float currentAmmo;
     public bool enemyIsDead = false;
+    private string gameobjectName;
     private Animator anim;
     [SerializeField]
     private GameObject keycard;
+    public int enemyIndex;
 
     public float EnemyHealth
     {
@@ -21,11 +23,32 @@ public class EnemyStats : MonoBehaviour
     private void Start()
     {
         currentAmmo = enemyAmmo;
+        gameobjectName = this.gameObject.name;
+        EnemyIndex();
     }
 
     private void Update()
     {
         EnemyDead();
+    }
+
+    public int EnemyIndex()
+    {
+        string str = string.Empty;
+        for (int i = 0; i < gameobjectName.Length; i++)
+        {
+            if (char.IsDigit(gameobjectName[i]))
+            {
+                str += gameobjectName[i];
+            }
+        }
+        if (str.Length > 0)
+        {
+            enemyIndex = int.Parse(str);
+            return enemyIndex;
+        }
+        else
+            return 0;        
     }
 
     public void EnemyDead()

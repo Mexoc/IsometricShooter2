@@ -6,8 +6,9 @@ public class EnemyPatrol : EnemyBaseFSM
 {
     private GameObject[] waypoints;
     int waypointsNumber = 4;
-    int currentWaypoint;
+    int currentWaypoint = 0;
     private GameObject waypointsGO;
+    public int index;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -35,6 +36,7 @@ public class EnemyPatrol : EnemyBaseFSM
 
     private void SetWaypoints()
     {
+        index = this.enemy.gameObject.GetComponent<EnemyStats>().EnemyIndex();
         if (this.waypoints != null)
             return;
         waypointsGO = GameObject.Find("waypointsGO");
@@ -43,7 +45,7 @@ public class EnemyPatrol : EnemyBaseFSM
         circle.transform.position = new Vector3(enemy.transform.position.x, enemy.transform.position.y + 50, enemy.transform.position.z);
         for (int i = 0; i < waypointsNumber; i++)
         {
-            pointPos = new Vector3(circle.transform.position.x + Random.Range(20, 60), circle.transform.position.y, circle.transform.position.z + Random.Range(20, 60));
+            pointPos = new Vector3(circle.transform.position.x + Random.Range(40, 200), circle.transform.position.y, circle.transform.position.z + Random.Range(40, 200));
             GameObject point = new GameObject();
             point.transform.position = pointPos;
             RaycastHit hit;
@@ -53,12 +55,24 @@ public class EnemyPatrol : EnemyBaseFSM
                 GameObject waypoint = new GameObject();
                 waypoint.name = "waypoint" + (i + 1);
                 waypoint.transform.position = hit.point;
-                waypoint.tag = "Waypoint";
+                if (index == 0)
+                {
+                    waypoint.tag = "Waypoint";
+                }
+                else
+                    waypoint.tag = "Waypoint" + index;
                 waypoint.transform.parent = waypointsGO.transform;
             }
+            else
+                continue;
             Destroy(point);
         }
         Destroy(circle);
-        this.waypoints = GameObject.FindGameObjectsWithTag("Waypoint"); 
+        if (index == 0)
+        {
+            this.waypoints = GameObject.FindGameObjectsWithTag("Waypoint");
+        }
+        else 
+            this.waypoints = GameObject.FindGameObjectsWithTag("Waypoint"+index);
     }
 }

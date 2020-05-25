@@ -73,6 +73,7 @@ public class PlayerShoot : MonoBehaviour
                         RaycastHit gunHit;                               
                         if (Physics.Raycast(playerGunBarrel.transform.position, shootDirection, out gunHit))
                         {
+                            audioSource.clip = gameObject.GetComponent<PlayerAudioClips>().shootingClip;
                             audioSource.Play();
                             bulletTraceLine.SetPosition(0, playerGunBarrel.transform.position);
                             bulletTraceLine.SetPosition(1, gunHit.point);
@@ -132,7 +133,9 @@ public class PlayerShoot : MonoBehaviour
     }
 
     private IEnumerator Reload()
-    {        
+    {
+        audioSource.clip = gameObject.GetComponent<PlayerAudioClips>().reloadClip;
+        audioSource.Play();
         yield return new WaitForSeconds(2);
         bulletCount = maxAmmo;
     }

@@ -59,7 +59,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 20
+  orthographic size: 30
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -224,71 +224,6 @@ CapsuleCollider:
   m_Height: 1.85
   m_Direction: 1
   m_Center: {x: 0, y: 0.95, z: 0}
---- !u!114 &1616865127021743352
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4100832367020892923}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0afeaee3f46470742a9a0a3772d21299, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isPlayerShooting: 0
-  canPlayerShoot: 0
-  shootingResult: {fileID: 631531967327447269, guid: 0cfbf91c7bfbe2f49b6807f853bfa737,
-    type: 3}
-  playerAnim: {fileID: 0}
-  playerCanShoot: 0
---- !u!114 &1616865127021743353
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4100832367020892923}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: febda215be287b143b7103ca243d2d9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentSpeed: 0
-  playerAnim: {fileID: 0}
-  isHorizontalMove: 0
-  isVerticalMove: 0
-  isSprint: 0
---- !u!114 &1616865127021743355
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4100832367020892923}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb53251c159be8f4bb5cb7ae22d5d1ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mousePoint: {x: 0, y: 0, z: 0}
---- !u!114 &4765890607901117854
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4100832367020892923}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dff61f3874411841a1a2a095e97a227, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerStamina: 100
-  playerHealthBar: {fileID: 0}
-  playerStaminaBar: {fileID: 0}
-  isPlayerDead: 0
-  isKeycardLooted: 0
 --- !u!82 &6495069722581415546
 AudioSource:
   m_ObjectHideFlags: 0
@@ -299,7 +234,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 65201ddabb4144f6a8fb9480120b7656, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -385,6 +320,85 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1616865127021743352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4100832367020892923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0afeaee3f46470742a9a0a3772d21299, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPlayerShooting: 0
+  canPlayerShoot: 0
+  shootingResult: {fileID: 631531967327447269, guid: 0cfbf91c7bfbe2f49b6807f853bfa737,
+    type: 3}
+  playerAnim: {fileID: 0}
+  playerCanShoot: 0
+--- !u!114 &1616865127021743353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4100832367020892923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: febda215be287b143b7103ca243d2d9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentSpeed: 0
+  playerAnim: {fileID: 0}
+  isHorizontalMove: 0
+  isVerticalMove: 0
+  isSprint: 0
+--- !u!114 &1616865127021743355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4100832367020892923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb53251c159be8f4bb5cb7ae22d5d1ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mousePoint: {x: 0, y: 0, z: 0}
+--- !u!114 &4445238010646543896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4100832367020892923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba5aa4f04021e5a4dba6f9b56df75227, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootingClip: {fileID: 8300000, guid: 65201ddabb4144f6a8fb9480120b7656, type: 3}
+  reloadClip: {fileID: 8300000, guid: cef0fa03af5b747f0abe82cde0b2bccc, type: 3}
+--- !u!114 &4765890607901117854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4100832367020892923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dff61f3874411841a1a2a095e97a227, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStamina: 100
+  playerHealthBar: {fileID: 0}
+  playerStaminaBar: {fileID: 0}
+  isPlayerDead: 0
+  isKeycardLooted: 0
 --- !u!1001 &5413269886040896912
 PrefabInstance:
   m_ObjectHideFlags: 0

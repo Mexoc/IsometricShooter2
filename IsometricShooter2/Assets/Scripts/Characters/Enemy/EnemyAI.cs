@@ -17,7 +17,8 @@ public class EnemyAI : MonoBehaviour
     private bool isPlayerDead;
     private bool enemyIsDead;
     private float enemyHealth;
-    private float angle;    
+    private float angle;
+    private AudioSource enemyAudioSource;
 
     public GameObject GetPlayer()
     {
@@ -28,7 +29,8 @@ public class EnemyAI : MonoBehaviour
     {
         PlayerDeathCheck();
         AmmoCheck();
-        gameObject.GetComponent<AudioSource>().Play();
+        enemyAudioSource.clip = gameObject.GetComponent<EnemyAudioClips>().enemyShotClip;
+        enemyAudioSource.Play();
         gunEnemy = gameObject.transform.Find("gunEnemyPos").gameObject;
         Vector3 playerPos = player.transform.position;
         playerPos.y += 2;
@@ -76,6 +78,7 @@ public class EnemyAI : MonoBehaviour
         enemyAmmo = gameObject.GetComponent<EnemyStats>().enemyAmmo;
         currentAmmo = gameObject.GetComponent<EnemyStats>().currentAmmo;
         enemyIsDead = gameObject.GetComponent<EnemyStats>().enemyIsDead;
+        enemyAudioSource = gameObject.GetComponent<AudioSource>();
         enemyIsShotAt = false;
     }
 
@@ -97,6 +100,8 @@ public class EnemyAI : MonoBehaviour
     private IEnumerator EnemyReload()
     {
         StopShooting();
+        enemyAudioSource.clip = gameObject.GetComponent<EnemyAudioClips>().enemyReloadClip;
+        enemyAudioSource.Play();
         yield return new WaitForSeconds(2f);
         currentAmmo = enemyAmmo;
         StartShooting();

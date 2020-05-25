@@ -18,6 +18,37 @@ TagManager:
   - MiniMap
   - Environment
   - Keycard
+  - Waypoint0
+  - Waypoint1
+  - Waypoint2
+  - Waypoint3
+  - Waypoint4
+  - Waypoint5
+  - Waypoint6
+  - Waypoint7
+  - Waypoint8
+  - Waypoint9
+  - Waypoint10
+  - Waypoint11
+  - Waypoint12
+  - Waypoint13
+  - Waypoint14
+  - Waypoint15
+  - Waypoint16
+  - Waypoint17
+  - Waypoint18
+  - Waypoint19
+  - Waypoint20
+  - Waypoint21
+  - Waypoint22
+  - Waypoint23
+  - Waypoint24
+  - Waypoint25
+  - Waypoint26
+  - Waypoint27
+  - Waypoint28
+  - Waypoint29
+  - Waypoint30
   layers:
   - Default
   - TransparentFX

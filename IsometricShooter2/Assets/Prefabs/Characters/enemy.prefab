@@ -765,6 +765,7 @@ GameObject:
   - component: {fileID: 4808980788826736671}
   - component: {fileID: -9210586441367444972}
   - component: {fileID: 2387685226360424542}
+  - component: {fileID: 5825957094204721856}
   m_Layer: 0
   m_Name: enemy
   m_TagString: Enemy
@@ -881,7 +882,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 7b6740ee86cb042b489ce4abcec89fd1, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -967,6 +968,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5825957094204721856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4808980787484213867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8496e82408a5c5e42810d22a8377473c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyShotClip: {fileID: 8300000, guid: 7b6740ee86cb042b489ce4abcec89fd1, type: 3}
+  enemyReloadClip: {fileID: 8300000, guid: cef0fa03af5b747f0abe82cde0b2bccc, type: 3}
 --- !u!1 &4808980787484213869
 GameObject:
   m_ObjectHideFlags: 0

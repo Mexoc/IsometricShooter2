@@ -6,6 +6,12 @@ public class MinimapCameraMovement : MonoBehaviour
 {
     private GameObject mainCamera;
     private GameObject[] minimapIcons;
+    private GameObject map;
+
+    private void Start()
+    {
+        map = GameObject.Find("map");
+    }
 
     void Update()
     {
@@ -27,9 +33,20 @@ public class MinimapCameraMovement : MonoBehaviour
     private void MinimapIconsLook()
     {
         minimapIcons = GameObject.FindGameObjectsWithTag("MiniMap");
-        foreach(GameObject temp in minimapIcons)
+        if (!map.activeSelf)
         {
-            temp.transform.LookAt(this.gameObject.transform);
+            foreach (GameObject temp in minimapIcons)
+            {
+                temp.transform.LookAt(this.gameObject.transform);
+            }
         }
+        else
+        {
+            foreach (GameObject temp in minimapIcons)
+            {
+                temp.transform.LookAt(GameObject.Find("MapCamera").transform);
+            }
+        }
+
     }
 }
