@@ -199,7 +199,7 @@ AnimatorStateTransition:
     m_EventTreshold: 50
   - m_ConditionMode: 3
     m_ConditionEvent: distance
-    m_EventTreshold: 20
+    m_EventTreshold: 25
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1643720477176724664}
   m_Solo: 0
@@ -420,7 +420,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: distance
-    m_EventTreshold: 20
+    m_EventTreshold: 30
   - m_ConditionMode: 1
     m_ConditionEvent: isPlayerVisible
     m_EventTreshold: 0
@@ -568,7 +568,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: distance
-    m_EventTreshold: 20
+    m_EventTreshold: 30
   - m_ConditionMode: 2
     m_ConditionEvent: isPlayerVisible
     m_EventTreshold: 0
@@ -698,7 +698,7 @@ AnimatorStateTransition:
     m_EventTreshold: 50
   - m_ConditionMode: 4
     m_ConditionEvent: distance
-    m_EventTreshold: 20
+    m_EventTreshold: 25
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2060371718802500537}
   m_Solo: 0
@@ -812,3 +812,4 @@ MonoBehaviour:
   speed: 5
   rotSpeed: 2
   movementAccuracy: 3
+  index: 0

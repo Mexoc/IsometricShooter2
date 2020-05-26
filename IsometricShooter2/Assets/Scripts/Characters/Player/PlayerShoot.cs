@@ -136,7 +136,7 @@ public class PlayerShoot : MonoBehaviour
     {
         audioSource.clip = gameObject.GetComponent<PlayerAudioClips>().reloadClip;
         audioSource.Play();
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         bulletCount = maxAmmo;
     }
 

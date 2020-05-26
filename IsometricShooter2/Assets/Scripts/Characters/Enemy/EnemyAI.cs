@@ -100,9 +100,9 @@ public class EnemyAI : MonoBehaviour
     private IEnumerator EnemyReload()
     {
         StopShooting();
+        yield return new WaitForSeconds(2f);
         enemyAudioSource.clip = gameObject.GetComponent<EnemyAudioClips>().enemyReloadClip;
         enemyAudioSource.Play();
-        yield return new WaitForSeconds(2f);
         currentAmmo = enemyAmmo;
         StartShooting();
     }

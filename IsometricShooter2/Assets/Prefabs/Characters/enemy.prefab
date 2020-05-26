@@ -836,7 +836,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.4
+  m_Radius: 1
   m_Height: 2.5
   m_Direction: 1
   m_Center: {x: 0, y: 1.3, z: 0}
@@ -872,6 +872,7 @@ MonoBehaviour:
   currentAmmo: 0
   enemyIsDead: 0
   keycard: {fileID: 7456476135192224721, guid: d0693a4e243f6a141a59e1e285cb2a9c, type: 3}
+  enemyIndex: 0
 --- !u!82 &2387685226360424542
 AudioSource:
   m_ObjectHideFlags: 0
