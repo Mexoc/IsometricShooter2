@@ -78,7 +78,7 @@
     <Compile Include="Assets\Scripts\Characters\Player\PlayerTurn.cs" />
     <Compile Include="Assets\Scripts\Items\KeyCardDrop.cs" />
     <Compile Include="Assets\Scripts\Items\KeycardLoot.cs" />
-    <Compile Include="Assets\Scripts\LevelCompleteTrigger.cs" />
+    <Compile Include="Assets\Scripts\LevelCompleteTriggers\LevelCompleteTrigger.cs" />
     <Compile Include="Assets\Scripts\UI\MapToggle\MapToggle.cs" />
     <Compile Include="Assets\Scripts\UI\MiniMap\MinimapCameraMovement.cs" />
     <None Include="Assets\Downloads\Military Vehicle\Humvee Info.txt" />

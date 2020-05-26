@@ -37,6 +37,7 @@ public class PlayerStats: MonoBehaviour
             Destroy(gameObject.GetComponent<PlayerTurn>());
             Destroy(gameObject.GetComponent<PlayerMovement>());
             Destroy(gameObject.GetComponent<PlayerShoot>());
+            Destroy(gameObject.GetComponent<LineRenderer>());
         }
     }
 

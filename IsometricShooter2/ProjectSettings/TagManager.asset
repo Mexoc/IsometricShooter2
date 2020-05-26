@@ -49,6 +49,8 @@ TagManager:
   - Waypoint28
   - Waypoint29
   - Waypoint30
+  - UILevelMap
+  - MapCamera
   layers:
   - Default
   - TransparentFX

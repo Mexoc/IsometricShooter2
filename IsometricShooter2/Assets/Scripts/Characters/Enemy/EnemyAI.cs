@@ -9,7 +9,7 @@ public class EnemyAI : MonoBehaviour
     public GameObject player;
     public GameObject bulletHole;
     private GameObject gunEnemy;
-    private float damage = 30;
+    private float damage = 20;
     private LineRenderer enemyShootTrace;
     public bool enemyIsShotAt;
     private float currentAmmo;
@@ -46,7 +46,7 @@ public class EnemyAI : MonoBehaviour
             enemyShootTrace.startWidth = 0.015f;
             enemyShootTrace.material.color = Color.red;
             enemyShootTrace.SetPosition(0, gunEnemy.transform.position);
-            enemyShootTrace.SetPosition(1, playerPos);
+            enemyShootTrace.SetPosition(1, hit.point);
             StartCoroutine("EnemyShootTraceRemove");
             var temp = Instantiate(bulletHole, hit.point, Quaternion.identity);
             temp.transform.SetParent(hit.collider.transform);

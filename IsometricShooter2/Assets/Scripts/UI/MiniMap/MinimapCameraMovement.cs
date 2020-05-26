@@ -6,17 +6,11 @@ public class MinimapCameraMovement : MonoBehaviour
 {
     private GameObject mainCamera;
     private GameObject[] minimapIcons;
-    private GameObject map;
-
-    private void Start()
-    {
-        map = GameObject.Find("map");
-    }
 
     void Update()
     {
         MinimapCameraMove();
-        MinimapIconsLook();
+        //MinimapIconsLook();
     }
 
     private void MinimapCameraMove()
@@ -24,7 +18,7 @@ public class MinimapCameraMovement : MonoBehaviour
         if (mainCamera == null)
         {
             mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-        }
+        }        
         this.gameObject.transform.position = mainCamera.transform.position;
         this.gameObject.transform.rotation = mainCamera.transform.rotation;
         this.gameObject.GetComponent<Camera>().orthographicSize = 50;
@@ -32,21 +26,11 @@ public class MinimapCameraMovement : MonoBehaviour
 
     private void MinimapIconsLook()
     {
-        minimapIcons = GameObject.FindGameObjectsWithTag("MiniMap");
-        if (!map.activeSelf)
+        minimapIcons = GameObject.FindGameObjectsWithTag("MiniMap");              
+        foreach (GameObject temp in minimapIcons)
         {
-            foreach (GameObject temp in minimapIcons)
-            {
-                temp.transform.LookAt(this.gameObject.transform);
-            }
+            temp.transform.LookAt(gameObject.transform);
         }
-        else
-        {
-            foreach (GameObject temp in minimapIcons)
-            {
-                temp.transform.LookAt(GameObject.Find("MapCamera").transform);
-            }
-        }
-
+                
     }
 }

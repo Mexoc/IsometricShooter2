@@ -29,7 +29,7 @@ public class EnemyPatrol : EnemyBaseFSM
         direction.y = 0;
         enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, Quaternion.LookRotation(direction), rotSpeed * Time.deltaTime);
         enemy.transform.Translate(0, 0, speed * Time.deltaTime);
-        if (Vector3.Distance(enemy.transform.position, waypoints[currentWaypoint].transform.position) < 2f)
+        if (Vector3.Distance(enemy.transform.position, waypoints[currentWaypoint].transform.position) < 3f)
         {
             currentWaypoint++;
         }        
@@ -46,7 +46,7 @@ public class EnemyPatrol : EnemyBaseFSM
         circle.transform.position = new Vector3(enemy.transform.position.x, enemy.transform.position.y + 50, enemy.transform.position.z);
         for (int i = 0; i < waypointsNumber; i++)
         {
-            pointPos = new Vector3(circle.transform.position.x + Random.Range(5, 20), circle.transform.position.y, circle.transform.position.z + Random.Range(5, 20));
+            pointPos = new Vector3(circle.transform.position.x + Random.Range(10, 20), circle.transform.position.y, circle.transform.position.z + Random.Range(10, 20));
             GameObject point = new GameObject();
             point.transform.position = pointPos;
             RaycastHit hit;

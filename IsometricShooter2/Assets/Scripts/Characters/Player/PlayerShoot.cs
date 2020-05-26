@@ -88,7 +88,7 @@ public class PlayerShoot : MonoBehaviour
                             }
                             if (gunHit.collider.gameObject.tag == "Enemy" || gunHit.collider.gameObject.tag == "EnemyMisc")
                             {
-                                //gunHit.collider.gameObject.GetComponent<EnemyAI>().enemyIsShotAt = true;
+                                gunHit.collider.gameObject.GetComponent<EnemyAI>().enemyIsShotAt = true;
                                 gunHit.collider.gameObject.GetComponent<EnemyStats>().EnemyHealth -= 20;
                             }
                             Destroy(temp, 1f);
