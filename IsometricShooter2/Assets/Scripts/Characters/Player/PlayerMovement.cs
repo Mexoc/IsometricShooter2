@@ -32,9 +32,9 @@ public class PlayerMovement: MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         ground = GameObject.FindGameObjectWithTag("Ground");
         playerRigidBody = player.GetComponent<Rigidbody>();
-        dirVert = Vector3.forward + Vector3.right;
-        dirHor = Vector3.forward + Vector3.left;     
-        baseSpeed = 0.5f * Time.deltaTime;
+        dirVert = Vector3.forward + Vector3.right;        
+        dirHor = Vector3.forward + Vector3.left;        
+        baseSpeed = 0.75f * Time.deltaTime;
         currentSpeed = baseSpeed;
     }
 
@@ -42,8 +42,8 @@ public class PlayerMovement: MonoBehaviour
     {       
         PlayerMove();
         PlayerSprint();
-        PlayerAnimationSet();
         PlayerMouseViewAngle();
+        PlayerAnimationSet();
     }
 
     private void PlayerMove()
@@ -52,28 +52,18 @@ public class PlayerMovement: MonoBehaviour
         vertical = Input.GetAxis("Vertical");
         if (horizontal != 0)
         {
-            player.transform.Translate(-horizontal * dirHor * currentSpeed);
+            player.transform.Translate(-horizontal * dirHor * currentSpeed, Space.World);
         }
         if (vertical != 0)
         {
-            player.transform.Translate(vertical * dirVert * currentSpeed);
+            player.transform.Translate(vertical * dirVert * currentSpeed, Space.World);
         }
         player.transform.Translate(0, gravity, 0);
     } 
 
-    private float PlayerMouseViewAngle()
-    {
-        mousePos = gameObject.GetComponent<PlayerTurn>().mousePoint;
-        Vector3 origin = (dirHor * 10000) - player.transform.position;
-        mouseVector = mousePos - player.transform.position;
-        mouseAngle = Vector3.Angle(origin, mouseVector);
-        Debug.Log(mouseAngle);
-        return mouseAngle;
-    }
-
     private void PlayerSprint()
     {
-        var sprintSpeed = 5f * Time.deltaTime;
+        var sprintSpeed = 6f * Time.deltaTime;
         if (Input.GetKey(KeyCode.LeftShift) && (horizontal != 0 || vertical != 0))
         {
             
@@ -103,6 +93,15 @@ public class PlayerMovement: MonoBehaviour
             player.GetComponent<PlayerStats>().playerStamina += Time.deltaTime * 40;
             player.GetComponent<PlayerStats>().playerStaminaBar.GetComponent<Image>().fillAmount += Time.deltaTime * 0.4f;
         }
+    }
+
+    private float PlayerMouseViewAngle()
+    {
+        mousePos = gameObject.GetComponent<PlayerTurn>().mousePoint;
+        Vector3 origin = (dirHor * 10000) - player.transform.position;
+        mouseVector = mousePos - player.transform.position;
+        mouseAngle = Vector3.Angle(origin, mouseVector);
+        return mouseAngle;
     }
 
     private void PlayerAnimationSet()

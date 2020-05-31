@@ -18,10 +18,12 @@ public class PlayerShoot : MonoBehaviour
     private int bulletCount;
     private int maxAmmo;
     private LineRenderer bulletTraceLine;
+    private AudioSource audioSource;
 
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        audioSource = gameObject.GetComponent<AudioSource>();
         playerCanShoot = true;
         canPlayerShoot = false;
         maxAmmo = 9;
@@ -45,6 +47,14 @@ public class PlayerShoot : MonoBehaviour
         {
             playerMoveComponent = gameObject.GetComponent<PlayerMovement>();
         }
+        if (bulletTraceLine == null)
+        {
+            bulletTraceLine = gameObject.AddComponent<LineRenderer>();
+            bulletTraceLine.startColor = Color.blue;
+            bulletTraceLine.endColor = Color.blue;
+            bulletTraceLine.material.color = Color.blue;
+            bulletTraceLine.startWidth = 0.015f;
+        }
         if (Input.GetMouseButtonDown(0) && playerMoveComponent.isVerticalMove || playerMoveComponent.isHorizontalMove || playerMoveComponent.isSprint)
             return;
         if (playerCanShoot)
@@ -63,9 +73,8 @@ public class PlayerShoot : MonoBehaviour
                         RaycastHit gunHit;                               
                         if (Physics.Raycast(playerGunBarrel.transform.position, shootDirection, out gunHit))
                         {
-                            bulletTraceLine = gameObject.AddComponent<LineRenderer>();
-                            bulletTraceLine.startWidth = 0.015f;
-                            bulletTraceLine.material.color = Color.blue;
+                            audioSource.clip = gameObject.GetComponent<PlayerAudioClips>().shootingClip;
+                            audioSource.Play();
                             bulletTraceLine.SetPosition(0, playerGunBarrel.transform.position);
                             bulletTraceLine.SetPosition(1, gunHit.point);
                             StartCoroutine("BulletLineTraceDisappear");
@@ -80,7 +89,6 @@ public class PlayerShoot : MonoBehaviour
                             if (gunHit.collider.gameObject.tag == "Enemy" || gunHit.collider.gameObject.tag == "EnemyMisc")
                             {
                                 gunHit.collider.gameObject.GetComponent<EnemyAI>().enemyIsShotAt = true;
-                                Debug.Log(gunHit.collider.gameObject.tag as string);
                                 gunHit.collider.gameObject.GetComponent<EnemyStats>().EnemyHealth -= 20;
                             }
                             Destroy(temp, 1f);
@@ -125,8 +133,10 @@ public class PlayerShoot : MonoBehaviour
     }
 
     private IEnumerator Reload()
-    {        
-        yield return new WaitForSeconds(2);
+    {
+        audioSource.clip = gameObject.GetComponent<PlayerAudioClips>().reloadClip;
+        audioSource.Play();
+        yield return new WaitForSeconds(1);
         bulletCount = maxAmmo;
     }
 

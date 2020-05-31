@@ -62,18 +62,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\CameraMovement.cs" />
+    <Compile Include="Assets\Scripts\Camera\CameraMovement.cs" />
+    <Compile Include="Assets\Scripts\Camera\CameraObstaclesTransparency.cs" />
     <Compile Include="Assets\Scripts\Characters\Enemy\EnemyAI.cs" />
     <Compile Include="Assets\Scripts\Characters\Enemy\EnemyAttack.cs" />
+    <Compile Include="Assets\Scripts\Characters\Enemy\EnemyAudioClips.cs" />
     <Compile Include="Assets\Scripts\Characters\Enemy\EnemyBaseFSM.cs" />
     <Compile Include="Assets\Scripts\Characters\Enemy\EnemyChase.cs" />
     <Compile Include="Assets\Scripts\Characters\Enemy\EnemyPatrol.cs" />
     <Compile Include="Assets\Scripts\Characters\Enemy\EnemyStats.cs" />
+    <Compile Include="Assets\Scripts\Characters\Player\PlayerAudioClips.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\PlayerShoot.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\PlayerTurn.cs" />
-    <Compile Include="Assets\Scripts\MiniMap\MinimapCameraMovement.cs" />
+    <Compile Include="Assets\Scripts\Items\ElevatorDoorStats.cs" />
+    <Compile Include="Assets\Scripts\Items\ElevatorPanelUse.cs" />
+    <Compile Include="Assets\Scripts\Items\KeyCardDrop.cs" />
+    <Compile Include="Assets\Scripts\Items\KeycardLoot.cs" />
+    <Compile Include="Assets\Scripts\LevelCompleteTriggers\LevelCompleteTrigger.cs" />
+    <Compile Include="Assets\Scripts\UI\MapToggle\MapToggle.cs" />
+    <Compile Include="Assets\Scripts\UI\MiniMap\MinimapCameraMovement.cs" />
+    <None Include="Assets\Downloads\Military Vehicle\Humvee Info.txt" />
     <None Include="Assets\Downloads\ManNeko_Assets\Adventurer Blake\Read Me.txt" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>E:/GitHub Repository/IsometricShooter/IsometricShooter2/IsometricShooter2/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
@@ -95,6 +105,9 @@
     </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>E:/GitHub Repository/IsometricShooter/IsometricShooter2/IsometricShooter2/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>E:/GitHub Repository/IsometricShooter/IsometricShooter2/IsometricShooter2/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>E:/GitHub Repository/IsometricShooter/IsometricShooter2/IsometricShooter2/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>

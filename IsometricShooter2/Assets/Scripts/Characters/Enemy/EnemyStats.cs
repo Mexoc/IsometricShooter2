@@ -5,6 +5,14 @@ using UnityEngine;
 public class EnemyStats : MonoBehaviour
 {
     private float enemyHealth = 100;
+    public float enemyAmmo = 25;
+    public float currentAmmo;
+    public bool enemyIsDead = false;
+    private string gameobjectName;
+    private Animator anim;
+    [SerializeField]
+    private GameObject keycard;
+    public int enemyIndex;
 
     public float EnemyHealth
     {
@@ -12,16 +20,61 @@ public class EnemyStats : MonoBehaviour
         set { enemyHealth = value; }
     }
 
-    private void Update()
+    private void Start()
     {
-        EnemyIsDead();
+        currentAmmo = enemyAmmo;
+        gameobjectName = this.gameObject.name;
+        EnemyIndex();
     }
 
-    public void EnemyIsDead()
+    private void Update()
     {
-        if (EnemyHealth <= 0)
+        EnemyDead();
+    }
+
+    public int EnemyIndex()
+    {
+        string str = string.Empty;
+        for (int i = 0; i < gameobjectName.Length; i++)
         {
-            Destroy(gameObject);
+            if (char.IsDigit(gameobjectName[i]))
+            {
+                str += gameobjectName[i];
+            }
+        }
+        if (str.Length > 0)
+        {
+            enemyIndex = int.Parse(str);
+            return enemyIndex;
+        }
+        else
+            return 0;        
+    }
+
+    public void EnemyDead()
+    {
+        if (enemyHealth <= 0)
+        {
+            GameObject temp;
+            enemyIsDead = true;
+            Vector3 tempRot = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, 90);
+            Destroy(gameObject.GetComponent<Rigidbody>());
+            Destroy(gameObject.GetComponent<EnemyAI>());
+            Destroy(gameObject.GetComponent<LineRenderer>());
+            gameObject.GetComponent<CapsuleCollider>().isTrigger = true;
+            gameObject.GetComponent<Animator>().enabled = false;
+            temp = gameObject.transform.Find("minimapIcon").gameObject;
+            temp.SetActive(false);
+            gameObject.tag = "Untagged";
+            gameObject.transform.eulerAngles = tempRot;            
+        }
+    }
+
+    public void DropKeycard()
+    {
+        if (this.enemyIsDead)
+        {
+            Instantiate(keycard, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y+1, gameObject.transform.position.z), Quaternion.identity);
         }
     }
 }
