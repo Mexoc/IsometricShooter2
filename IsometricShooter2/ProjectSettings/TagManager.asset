@@ -51,6 +51,8 @@ TagManager:
   - Waypoint30
   - UILevelMap
   - MapCamera
+  - ElevatorPanel
+  - ElevatorDoor
   layers:
   - Default
   - TransparentFX

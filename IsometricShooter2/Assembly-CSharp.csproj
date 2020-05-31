@@ -76,6 +76,8 @@
     <Compile Include="Assets\Scripts\Characters\Player\PlayerShoot.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\PlayerTurn.cs" />
+    <Compile Include="Assets\Scripts\Items\ElevatorDoorStats.cs" />
+    <Compile Include="Assets\Scripts\Items\ElevatorPanelUse.cs" />
     <Compile Include="Assets\Scripts\Items\KeyCardDrop.cs" />
     <Compile Include="Assets\Scripts\Items\KeycardLoot.cs" />
     <Compile Include="Assets\Scripts\LevelCompleteTriggers\LevelCompleteTrigger.cs" />
