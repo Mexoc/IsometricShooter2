@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Scene0 - MainMenu.unity
+    guid: 11687862b0ff2fb41b3d4e359761d4e9
+  - enabled: 1
+    path: Assets/Scenes/Scene2 - MilitaryBase.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/Scene1 - UndergroundLab.unity
+    guid: f8d1ae7310472f141b97515fc75d1b51
   m_configObjects: {}

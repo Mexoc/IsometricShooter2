@@ -46,7 +46,7 @@ public class EnemyPatrol : EnemyBaseFSM
         circle.transform.position = new Vector3(enemy.transform.position.x, enemy.transform.position.y + 50, enemy.transform.position.z);
         for (int i = 0; i < waypointsNumber; i++)
         {
-            pointPos = new Vector3(circle.transform.position.x + Random.Range(5, 10), circle.transform.position.y, circle.transform.position.z + Random.Range(5, 10));
+            pointPos = new Vector3(circle.transform.position.x + Random.Range(5, 15), circle.transform.position.y, circle.transform.position.z + Random.Range(5, 15));
             GameObject point = new GameObject();
             point.transform.position = pointPos;
             RaycastHit hit;

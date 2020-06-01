@@ -61,14 +61,14 @@ public class PlayerShoot : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                isPlayerShooting = true;
-                bulletCount -= 1;
+                isPlayerShooting = true;                
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit))
                 {                    
                     if (hit.collider.gameObject.tag != "Player" && hit.collider.gameObject.tag != "Gun" && hit.collider.gameObject.tag != "PlayerBody" && hit.collider.gameObject.tag != "GunBarrel" && hit.collider.gameObject.tag != "PlayerMisc")
                     {
+                        bulletCount -= 1;
                         Vector3 shootDirection = hit.point - playerGunBarrel.transform.position;
                         RaycastHit gunHit;                               
                         if (Physics.Raycast(playerGunBarrel.transform.position, shootDirection, out gunHit))
