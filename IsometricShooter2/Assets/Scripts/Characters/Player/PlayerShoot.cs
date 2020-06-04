@@ -19,6 +19,7 @@ public class PlayerShoot : MonoBehaviour
     private int maxAmmo;
     private LineRenderer bulletTraceLine;
     private AudioSource audioSource;
+    private float shootForce = 5f;
 
     private void Awake()
     {
@@ -72,12 +73,16 @@ public class PlayerShoot : MonoBehaviour
                         Vector3 shootDirection = hit.point - playerGunBarrel.transform.position;
                         RaycastHit gunHit;                               
                         if (Physics.Raycast(playerGunBarrel.transform.position, shootDirection, out gunHit))
-                        {
+                        {                            
                             audioSource.clip = gameObject.GetComponent<PlayerAudioClips>().shootingClip;
-                            audioSource.Play();
+                            audioSource.Play();                            
                             bulletTraceLine.SetPosition(0, playerGunBarrel.transform.position);
-                            bulletTraceLine.SetPosition(1, gunHit.point);
+                            bulletTraceLine.SetPosition(1, gunHit.point);                            
                             StartCoroutine("BulletLineTraceDisappear");
+                            if (gunHit.collider.gameObject.GetComponent<Rigidbody>() != null)
+                            {
+                                gunHit.collider.gameObject.GetComponent<Rigidbody>()?.AddForce(shootDirection * shootForce);
+                            }                            
                             GameObject temp = Instantiate(shootingResult, gunHit.point, Quaternion.identity);
                             Vector3 tempScale = temp.transform.localScale;
                             temp.transform.LookAt(player.transform);
