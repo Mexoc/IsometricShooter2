@@ -19,7 +19,7 @@ public class EnemyAI : MonoBehaviour
     private float enemyHealth;
     private float angle;
     private AudioSource enemyAudioSource;
-    private float enemyShootForce = 10f;
+    private float enemyShootForce = 100f;
 
     public GameObject GetPlayer()
     {

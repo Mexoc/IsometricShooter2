@@ -19,7 +19,7 @@ public class PlayerShoot : MonoBehaviour
     private int maxAmmo;
     private LineRenderer bulletTraceLine;
     private AudioSource audioSource;
-    private float shootForce = 5f;
+    private float shootForce = 3f;
 
     private void Awake()
     {
@@ -79,7 +79,7 @@ public class PlayerShoot : MonoBehaviour
                             bulletTraceLine.SetPosition(0, playerGunBarrel.transform.position);
                             bulletTraceLine.SetPosition(1, gunHit.point);                            
                             StartCoroutine("BulletLineTraceDisappear");
-                            if (gunHit.collider.gameObject.GetComponent<Rigidbody>() != null)
+                            if (gunHit.collider.gameObject.GetComponent<Rigidbody>())
                             {
                                 gunHit.collider.gameObject.GetComponent<Rigidbody>()?.AddForce(shootDirection * shootForce);
                             }                            
