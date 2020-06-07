@@ -19,7 +19,7 @@ public class PlayerShoot : MonoBehaviour
     private int maxAmmo;
     private LineRenderer bulletTraceLine;
     private AudioSource audioSource;
-    private float shootForce = 3f;
+    private float shootForce = 10f;
 
     private void Awake()
     {
@@ -81,7 +81,10 @@ public class PlayerShoot : MonoBehaviour
                             StartCoroutine("BulletLineTraceDisappear");
                             if (gunHit.collider.gameObject.GetComponent<Rigidbody>())
                             {
-                                gunHit.collider.gameObject.GetComponent<Rigidbody>()?.AddForce(shootDirection * shootForce);
+                                if (gunHit.collider.gameObject.tag != "Enemy")
+                                {
+                                    gunHit.collider.gameObject.GetComponent<Rigidbody>().AddForce(shootDirection * shootForce);
+                                }                                
                             }                            
                             GameObject temp = Instantiate(shootingResult, gunHit.point, Quaternion.identity);
                             Vector3 tempScale = temp.transform.localScale;
