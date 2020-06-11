@@ -34,7 +34,7 @@ public class PlayerMovement: MonoBehaviour
         playerRigidBody = player.GetComponent<Rigidbody>();
         dirVert = Vector3.forward + Vector3.right;        
         dirHor = Vector3.forward + Vector3.left;        
-        baseSpeed = 0.75f * Time.deltaTime;
+        baseSpeed = 0.8f * Time.deltaTime;
         currentSpeed = baseSpeed;
     }
 
@@ -63,7 +63,7 @@ public class PlayerMovement: MonoBehaviour
 
     private void PlayerSprint()
     {
-        var sprintSpeed = 6f * Time.deltaTime;
+        var sprintSpeed = 5f * Time.deltaTime;
         if (Input.GetKey(KeyCode.LeftShift) && (horizontal != 0 || vertical != 0))
         {
             

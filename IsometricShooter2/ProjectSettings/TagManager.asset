@@ -53,6 +53,7 @@ TagManager:
   - MapCamera
   - ElevatorPanel
   - ElevatorDoor
+  - LifeCount
   layers:
   - Default
   - TransparentFX
