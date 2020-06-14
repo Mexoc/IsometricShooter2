@@ -7,7 +7,7 @@ public static class ButtonEvents
 {
     public static void NewGameStart()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
     public static void GameExit()

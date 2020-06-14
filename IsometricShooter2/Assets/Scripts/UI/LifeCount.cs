@@ -19,41 +19,35 @@ public class LifeCount : MonoBehaviour
     void Update()
     {
         DisplayLifeCount();
-        ReduceLife();
+        StartCoroutine("LifeCheck");
     }
 
     private void DisplayLifeCount()
     {
-        lifeCountText.text = "x " + PlayerLifeCount.playerLife;        
+        lifeCountText.text = "";
+        lifeCountText.text = "x " + PlayerLifeCount.playerLife;
     }
 
-    private void ReduceLife()
+    private IEnumerator LifeCheck()
     {
-        
         if (player.GetComponent<PlayerStats>().isPlayerDead)
         {            
             if (PlayerLifeCount.playerLife > 0)
-            {
-                PlayerLifeCount.playerLife--;
-                lifeCountText.text = "";
+            {                
+                yield return new WaitForSeconds(2f);
                 ReloadCurrentScene();
-            }    
+                PlayerLifeCount.playerLife--;
+            }
             else
             {
+                yield return new WaitForSeconds(2f);
                 SceneManager.LoadScene(0);
             }
         }
-        
     }
 
     private void ReloadCurrentScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    private IEnumerator PauseBeforeReloadScene()
-    {
-        yield return new WaitForSeconds(5);
-        ReloadCurrentScene();
     }
 }
