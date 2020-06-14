@@ -11,7 +11,6 @@ public class PlayerStats: MonoBehaviour
     public bool isPlayerDead = false;
     private Animator playerAnim;
     public bool isKeycardLooted;
-    public int lifeCount = 3;
 
     private void Start()
     {

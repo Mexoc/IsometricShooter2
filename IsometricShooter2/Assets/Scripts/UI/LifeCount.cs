@@ -10,15 +10,9 @@ public class LifeCount : MonoBehaviour
     private GameObject player;
     private Text lifeCountText;
 
-    private void Awake()
-    {
-        DontDestroyOnLoad(gameObject.transform.parent);
-    }
-
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        lifeCount = player.GetComponent<PlayerStats>().lifeCount;
         lifeCountText = gameObject.GetComponent<Text>();
     }
 
@@ -30,16 +24,17 @@ public class LifeCount : MonoBehaviour
 
     private void DisplayLifeCount()
     {
-        lifeCountText.text = "x " + lifeCount;        
+        lifeCountText.text = "x " + PlayerLifeCount.playerLife;        
     }
 
     private void ReduceLife()
     {
+        
         if (player.GetComponent<PlayerStats>().isPlayerDead)
-        {
-            if (lifeCount > 0)
+        {            
+            if (PlayerLifeCount.playerLife > 0)
             {
-                lifeCount--;
+                PlayerLifeCount.playerLife--;
                 lifeCountText.text = "";
                 ReloadCurrentScene();
             }    
@@ -48,16 +43,17 @@ public class LifeCount : MonoBehaviour
                 SceneManager.LoadScene(0);
             }
         }
+        
     }
 
     private void ReloadCurrentScene()
     {
-        StartCoroutine("PauseBeforeReloadScene");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private IEnumerator PauseBeforeReloadScene()
     {
-        yield return new WaitForSeconds(5);        
+        yield return new WaitForSeconds(5);
+        ReloadCurrentScene();
     }
 }
