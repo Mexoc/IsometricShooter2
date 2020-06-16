@@ -88,6 +88,8 @@
     <Compile Include="Assets\Scripts\UI\MainMenuButtons.cs" />
     <Compile Include="Assets\Scripts\UI\MapToggle\MapToggle.cs" />
     <Compile Include="Assets\Scripts\UI\MiniMap\MinimapCameraMovement.cs" />
+    <Compile Include="Assets\Scripts\UI\Objectives\SceneCount.cs" />
+    <Compile Include="Assets\Scripts\UI\Objectives\ToggleObjectiveMission1.cs" />
     <None Include="Assets\Downloads\Military Vehicle\Humvee Info.txt" />
     <None Include="Assets\Downloads\ManNeko_Assets\Adventurer Blake\Read Me.txt" />
     <Reference Include="Unity.Timeline.Editor">
