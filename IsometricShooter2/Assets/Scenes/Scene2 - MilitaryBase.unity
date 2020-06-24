@@ -22269,6 +22269,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1893372726}
     m_Modifications:
+    - target: {fileID: 814978980218535409, guid: 1b5bf4387b362bd4c928d4601e244e17,
+        type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 7445695862028136116, guid: 1b5bf4387b362bd4c928d4601e244e17,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -84,12 +84,14 @@
     <Compile Include="Assets\Scripts\Items\KeycardLoot.cs" />
     <Compile Include="Assets\Scripts\LevelCompleteTriggers\LevelCompleteTrigger.cs" />
     <Compile Include="Assets\Scripts\UI\ButtonEvents.cs" />
+    <Compile Include="Assets\Scripts\UI\IngameMenu.cs" />
     <Compile Include="Assets\Scripts\UI\LifeCount.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenuButtons.cs" />
     <Compile Include="Assets\Scripts\UI\MapToggle\MapToggle.cs" />
     <Compile Include="Assets\Scripts\UI\MiniMap\MinimapCameraMovement.cs" />
     <Compile Include="Assets\Scripts\UI\Objectives\SceneCount.cs" />
     <Compile Include="Assets\Scripts\UI\Objectives\ToggleObjectiveMission1.cs" />
+    <Compile Include="Assets\Scripts\UI\SoundSliderVolume.cs" />
     <None Include="Assets\Downloads\Military Vehicle\Humvee Info.txt" />
     <None Include="Assets\Downloads\ManNeko_Assets\Adventurer Blake\Read Me.txt" />
     <Reference Include="Unity.Timeline.Editor">

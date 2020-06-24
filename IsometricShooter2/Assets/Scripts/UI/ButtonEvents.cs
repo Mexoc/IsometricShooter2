@@ -15,4 +15,8 @@ public static class ButtonEvents
         Application.Quit();
     }
     
+    public static void LoadMainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
 }

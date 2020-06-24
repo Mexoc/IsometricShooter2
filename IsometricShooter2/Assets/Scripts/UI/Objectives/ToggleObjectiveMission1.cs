@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ToggleObjectiveMission1 : MonoBehaviour
 {
@@ -13,7 +14,10 @@ public class ToggleObjectiveMission1 : MonoBehaviour
     void Start()
     {
         objectiveUI = GameObject.Find("objectiveImage");
-        isElevatorDoorOpen = GameObject.FindGameObjectWithTag("ElevatorDoor").GetComponent<ElevatorDoorStats>().isDoorOpen;
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            isElevatorDoorOpen = GameObject.FindGameObjectWithTag("ElevatorDoor").GetComponent<ElevatorDoorStats>().isDoorOpen;
+        }        
         objectiveText = objectiveUI.GetComponentInChildren<Text>();
         objectiveText.text = "";
         player = GameObject.FindGameObjectWithTag("Player");
@@ -51,7 +55,7 @@ public class ToggleObjectiveMission1 : MonoBehaviour
 
     private void ObjectiveTask()
     {        
-        if (SceneCount.GetCurrentSceneInt() == 1)
+        if (SceneManager.GetActiveScene().buildIndex == 1)
         {
             isElevatorDoorOpen = GameObject.FindGameObjectWithTag("ElevatorDoor").GetComponent<ElevatorDoorStats>().isDoorOpen;
             if (HasPlayerKeycard() && isElevatorDoorOpen)
@@ -67,7 +71,7 @@ public class ToggleObjectiveMission1 : MonoBehaviour
                 objectiveText.text = "Используйте ключ-карту на пульте управления лифтом";
             }
         }
-        else if (SceneCount.GetCurrentSceneInt() == 2)
+        else if (SceneManager.GetActiveScene().buildIndex == 2)
         {
             objectiveText.text = "Покиньте базу через центральный вход";
         }
