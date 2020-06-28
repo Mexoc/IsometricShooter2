@@ -24,8 +24,7 @@ public class IngameMenu : MonoBehaviour
 
     void Update()
     {
-        ToggleGameMenu();
-        CursorUICheck();        
+        ToggleGameMenu();   
     }
 
     private void ToggleGameMenu()
@@ -38,25 +37,9 @@ public class IngameMenu : MonoBehaviour
             }
             else
             {
-                ingameMenu.SetActive(false);
+                CloseIngameMenu();
             }
                 
-        }
-    }
-
-    private void CursorUICheck()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
-        {
-            Debug.Log(hit.transform.gameObject.layer);
-            //if (hit.transform.gameObject.layer == LayerMask.NameToLayer("UI"))
-            //{
-            //    player.GetComponent<PlayerStats>().CanPlayerShoot = false;
-            //}
-            //else
-            //    player.GetComponent<PlayerStats>().CanPlayerShoot = true;
         }
     }
 

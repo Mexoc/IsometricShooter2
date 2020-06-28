@@ -766,6 +766,7 @@ GameObject:
   - component: {fileID: -9210586441367444972}
   - component: {fileID: 2387685226360424542}
   - component: {fileID: 5825957094204721856}
+  - component: {fileID: 2811437276382851884}
   m_Layer: 0
   m_Name: enemy
   m_TagString: Enemy
@@ -836,10 +837,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1
-  m_Height: 2.5
-  m_Direction: 1
-  m_Center: {x: 0, y: 1.3, z: 0}
+  m_Radius: 0.2
+  m_Height: 1.3
+  m_Direction: 2
+  m_Center: {x: 0.1, y: 1.9, z: 0.8}
 --- !u!114 &4808980788826736671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -983,6 +984,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyShotClip: {fileID: 8300000, guid: 7b6740ee86cb042b489ce4abcec89fd1, type: 3}
   enemyReloadClip: {fileID: 8300000, guid: cef0fa03af5b747f0abe82cde0b2bccc, type: 3}
+--- !u!136 &2811437276382851884
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4808980787484213867}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2.7
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.3, z: 0}
 --- !u!1 &4808980787484213869
 GameObject:
   m_ObjectHideFlags: 0

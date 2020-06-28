@@ -24,7 +24,6 @@ public class PlayerShoot : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         audioSource = gameObject.GetComponent<AudioSource>();
-        canPlayerShoot = player.GetComponent<PlayerStats>().CanPlayerShoot;
         maxAmmo = 9;
         bulletCount = maxAmmo;
         
@@ -56,6 +55,7 @@ public class PlayerShoot : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0) && playerMoveComponent.isVerticalMove || playerMoveComponent.isHorizontalMove || playerMoveComponent.isSprint)
             return;
+        canPlayerShoot = player.GetComponent<PlayerStats>().CanPlayerShoot;
         if (canPlayerShoot)
         {
             if (Input.GetMouseButtonDown(0))

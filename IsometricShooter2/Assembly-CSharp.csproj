@@ -84,6 +84,7 @@
     <Compile Include="Assets\Scripts\Items\KeycardLoot.cs" />
     <Compile Include="Assets\Scripts\LevelCompleteTriggers\LevelCompleteTrigger.cs" />
     <Compile Include="Assets\Scripts\UI\ButtonEvents.cs" />
+    <Compile Include="Assets\Scripts\UI\CursorOverUICheck.cs" />
     <Compile Include="Assets\Scripts\UI\IngameMenu.cs" />
     <Compile Include="Assets\Scripts\UI\LifeCount.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenuButtons.cs" />
