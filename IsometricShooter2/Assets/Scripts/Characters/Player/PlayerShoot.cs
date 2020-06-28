@@ -13,7 +13,6 @@ public class PlayerShoot : MonoBehaviour
     private Vector3 collisionPoint;
     public Animator playerAnim;
     private PlayerMovement playerMoveComponent;
-    public bool playerCanShoot;
     private GameObject bulletDisplay;
     private int bulletCount;
     private int maxAmmo;
@@ -25,8 +24,7 @@ public class PlayerShoot : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         audioSource = gameObject.GetComponent<AudioSource>();
-        playerCanShoot = true;
-        canPlayerShoot = false;
+        canPlayerShoot = player.GetComponent<PlayerStats>().CanPlayerShoot;
         maxAmmo = 9;
         bulletCount = maxAmmo;
         
@@ -35,7 +33,7 @@ public class PlayerShoot : MonoBehaviour
     void Update()
     {
         BulletCount();
-        PlayerShooting();        
+        PlayerShooting();
     }    
 
     private void PlayerShooting()
@@ -58,7 +56,7 @@ public class PlayerShoot : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0) && playerMoveComponent.isVerticalMove || playerMoveComponent.isHorizontalMove || playerMoveComponent.isSprint)
             return;
-        if (playerCanShoot)
+        if (canPlayerShoot)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -127,11 +125,11 @@ public class PlayerShoot : MonoBehaviour
         }
         if (bulletCount == 0)
         {
-            playerCanShoot = false;
+            canPlayerShoot = false;
         }
         else
         {
-            playerCanShoot = true;
+            canPlayerShoot = true;
         }
         if (Input.GetKeyDown(KeyCode.R))
         {

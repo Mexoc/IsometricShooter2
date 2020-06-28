@@ -11,6 +11,7 @@ public class PlayerStats: MonoBehaviour
     public bool isPlayerDead = false;
     private Animator playerAnim;
     public bool isKeycardLooted;
+    private bool canPlayerShoot;
 
     private void Start()
     {
@@ -20,6 +21,7 @@ public class PlayerStats: MonoBehaviour
         playerHealthBar = GameObject.Find("PlayerHealthBar");
         playerStaminaBar = GameObject.Find("PlayerStaminaBar");
         isKeycardLooted = false;
+        canPlayerShoot = true;
     }
 
     public float PlayerHealth
@@ -39,6 +41,12 @@ public class PlayerStats: MonoBehaviour
             Destroy(gameObject.GetComponent<PlayerShoot>());
             Destroy(gameObject.GetComponent<LineRenderer>());
         }
+    }
+
+    public bool CanPlayerShoot
+    {
+        get { return canPlayerShoot; }
+        set { canPlayerShoot = value; }
     }
 
     private void Update()
