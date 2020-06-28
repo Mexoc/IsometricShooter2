@@ -30,6 +30,12 @@ public class LifeCount : MonoBehaviour
 
     private IEnumerator LifeCheck()
     {
+        if (player.GetComponent<PlayerStats>().isPlayerDead == false && player.transform.position.y < -5)
+        {
+            yield return new WaitForSeconds(2f);
+            ReloadCurrentScene();
+            PlayerLifeCount.playerLife--;
+        }
         if (player.GetComponent<PlayerStats>().isPlayerDead)
         {            
             if (PlayerLifeCount.playerLife > 0)
