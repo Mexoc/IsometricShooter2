@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyStats : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class EnemyStats : MonoBehaviour
     private GameObject keycard;
     public int enemyIndex;
     private CapsuleCollider[] enemyColliders = new CapsuleCollider[2];
+    public Image enemyHealthBar;
 
     public float EnemyHealth
     {
@@ -25,7 +27,8 @@ public class EnemyStats : MonoBehaviour
     {
         enemyColliders = gameObject.GetComponents<CapsuleCollider>();
         currentAmmo = enemyAmmo;
-        gameobjectName = this.gameObject.name;           
+        gameobjectName = this.gameObject.name;
+        enemyHealthBar = gameObject.GetComponentInChildren<Canvas>().GetComponentInChildren<Image>();
         EnemyIndex();
     }
 

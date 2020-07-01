@@ -6,6 +6,7 @@ public class PlayerStats: MonoBehaviour
 {
     private float playerHealth = 100;
     public float playerStamina = 100;
+    public float playerDamage = 20;
     public bool isKeycardLooted = false;
     private static bool canPlayerShoot;
     public GameObject playerHealthBar;

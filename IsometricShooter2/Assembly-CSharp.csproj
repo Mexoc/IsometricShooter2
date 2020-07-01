@@ -86,6 +86,7 @@
     <Compile Include="Assets\Scripts\LevelCompleteTriggers\LevelCompleteTrigger.cs" />
     <Compile Include="Assets\Scripts\UI\ButtonEvents.cs" />
     <Compile Include="Assets\Scripts\UI\CursorOverUICheck.cs" />
+    <Compile Include="Assets\Scripts\UI\EnemyHealthBars.cs" />
     <Compile Include="Assets\Scripts\UI\IngameMenu.cs" />
     <Compile Include="Assets\Scripts\UI\LifeCount.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenuButtons.cs" />

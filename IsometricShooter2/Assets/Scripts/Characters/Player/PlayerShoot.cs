@@ -26,7 +26,7 @@ public class PlayerShoot : MonoBehaviour
         audioSource = gameObject.GetComponent<AudioSource>();
         maxAmmo = 9;
         bulletCount = maxAmmo;
-        canvas = GameObject.FindObjectOfType<Canvas>();
+        canvas = GameObject.Find("MainCanvas").GetComponent<Canvas>();
     }
 
     void Update()
@@ -84,7 +84,8 @@ public class PlayerShoot : MonoBehaviour
                             if (gunHit.collider.gameObject.tag == "Enemy" || gunHit.collider.gameObject.tag == "EnemyMisc")
                             {
                                 gunHit.collider.gameObject.GetComponent<EnemyAI>().enemyIsShotAt = true;
-                                gunHit.collider.gameObject.GetComponent<EnemyStats>().EnemyHealth -= 20;
+                                gunHit.collider.gameObject.GetComponent<EnemyStats>().EnemyHealth -= player.GetComponent<PlayerStats>().playerDamage;
+                                gunHit.collider.gameObject.GetComponent<EnemyStats>().enemyHealthBar.fillAmount -= player.GetComponent<PlayerStats>().playerDamage * 0.01f;
                             }
                             Destroy(temp, 1f);
                         }
