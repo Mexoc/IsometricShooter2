@@ -7,77 +7,72 @@ public class PlayerShoot : MonoBehaviour
 {
     private GameObject player;
     public bool isPlayerShooting;
-    public bool canPlayerShoot;
     public GameObject shootingResult;
     private GameObject playerGunBarrel;
     private Vector3 collisionPoint;
     public Animator playerAnim;
     private PlayerMovement playerMoveComponent;
-    public bool playerCanShoot;
     private GameObject bulletDisplay;
     private int bulletCount;
     private int maxAmmo;
     private LineRenderer bulletTraceLine;
     private AudioSource audioSource;
+    private float shootForce = 10f;
+    private Canvas canvas;
 
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         audioSource = gameObject.GetComponent<AudioSource>();
-        playerCanShoot = true;
-        canPlayerShoot = false;
         maxAmmo = 9;
         bulletCount = maxAmmo;
-        
+        canvas = GameObject.FindObjectOfType<Canvas>();
     }
 
     void Update()
     {
         BulletCount();
-        PlayerShooting();        
+        PlayerShooting();
     }    
 
     private void PlayerShooting()
     {
-        if (playerGunBarrel == null)
-        {
-            playerGunBarrel = GameObject.FindGameObjectWithTag("GunBarrel");
-        }
-        if (playerMoveComponent == null)
-        {
-            playerMoveComponent = gameObject.GetComponent<PlayerMovement>();
-        }
-        if (bulletTraceLine == null)
-        {
-            bulletTraceLine = gameObject.AddComponent<LineRenderer>();
-            bulletTraceLine.startColor = Color.blue;
-            bulletTraceLine.endColor = Color.blue;
-            bulletTraceLine.material.color = Color.blue;
-            bulletTraceLine.startWidth = 0.015f;
-        }
+        SetShootingComponents();        
         if (Input.GetMouseButtonDown(0) && playerMoveComponent.isVerticalMove || playerMoveComponent.isHorizontalMove || playerMoveComponent.isSprint)
             return;
-        if (playerCanShoot)
+        if (Input.GetMouseButtonDown(0))
         {
-            if (Input.GetMouseButtonDown(0))
+            if (canvas.GetComponent<CursorOverUICheck>().CursorRaycastingUI() == true)
             {
-                isPlayerShooting = true;
-                bulletCount -= 1;
+                isPlayerShooting = false;
+                return;
+            }
+            else
+            {
+                isPlayerShooting = true;                
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit))
                 {                    
                     if (hit.collider.gameObject.tag != "Player" && hit.collider.gameObject.tag != "Gun" && hit.collider.gameObject.tag != "PlayerBody" && hit.collider.gameObject.tag != "GunBarrel" && hit.collider.gameObject.tag != "PlayerMisc")
                     {
+                        bulletCount -= 1;
                         Vector3 shootDirection = hit.point - playerGunBarrel.transform.position;
                         RaycastHit gunHit;                               
                         if (Physics.Raycast(playerGunBarrel.transform.position, shootDirection, out gunHit))
-                        {
+                        {                            
                             audioSource.clip = gameObject.GetComponent<PlayerAudioClips>().shootingClip;
-                            audioSource.Play();
+                            audioSource.Play();                            
                             bulletTraceLine.SetPosition(0, playerGunBarrel.transform.position);
-                            bulletTraceLine.SetPosition(1, gunHit.point);
+                            bulletTraceLine.SetPosition(1, gunHit.point);                            
                             StartCoroutine("BulletLineTraceDisappear");
+                            if (gunHit.collider.gameObject.GetComponent<Rigidbody>())
+                            {
+                                if (gunHit.collider.gameObject.tag != "Enemy")
+                                {
+                                    gunHit.collider.gameObject.GetComponent<Rigidbody>().AddForce(shootDirection * shootForce);
+                                }                                
+                            }                            
                             GameObject temp = Instantiate(shootingResult, gunHit.point, Quaternion.identity);
                             Vector3 tempScale = temp.transform.localScale;
                             temp.transform.LookAt(player.transform);
@@ -95,10 +90,6 @@ public class PlayerShoot : MonoBehaviour
                         }
                     }
                 }
-            }
-            else
-            {
-                isPlayerShooting = false;
             }
         }
         else return;
@@ -119,11 +110,11 @@ public class PlayerShoot : MonoBehaviour
         }
         if (bulletCount == 0)
         {
-            playerCanShoot = false;
+            player.GetComponent<PlayerStats>().CanPlayerShoot = false;
         }
         else
         {
-            playerCanShoot = true;
+            player.GetComponent<PlayerStats>().CanPlayerShoot = true;
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -144,5 +135,25 @@ public class PlayerShoot : MonoBehaviour
     {
         yield return new WaitForSeconds(0.05f);
         Destroy(gameObject.GetComponent<LineRenderer>());
+    }
+
+    private void SetShootingComponents()
+    {
+        if (playerGunBarrel == null)
+        {
+            playerGunBarrel = GameObject.FindGameObjectWithTag("GunBarrel");
+        }
+        if (playerMoveComponent == null)
+        {
+            playerMoveComponent = gameObject.GetComponent<PlayerMovement>();
+        }
+        if (bulletTraceLine == null)
+        {
+            bulletTraceLine = gameObject.AddComponent<LineRenderer>();
+            bulletTraceLine.startColor = Color.blue;
+            bulletTraceLine.endColor = Color.blue;
+            bulletTraceLine.material.color = Color.blue;
+            bulletTraceLine.startWidth = 0.015f;
+        }
     }
 }

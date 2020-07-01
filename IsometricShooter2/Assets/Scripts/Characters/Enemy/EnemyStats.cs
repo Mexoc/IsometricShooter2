@@ -13,6 +13,7 @@ public class EnemyStats : MonoBehaviour
     [SerializeField]
     private GameObject keycard;
     public int enemyIndex;
+    private CapsuleCollider[] enemyColliders = new CapsuleCollider[2];
 
     public float EnemyHealth
     {
@@ -22,8 +23,9 @@ public class EnemyStats : MonoBehaviour
 
     private void Start()
     {
+        enemyColliders = gameObject.GetComponents<CapsuleCollider>();
         currentAmmo = enemyAmmo;
-        gameobjectName = this.gameObject.name;
+        gameobjectName = this.gameObject.name;           
         EnemyIndex();
     }
 
@@ -61,7 +63,11 @@ public class EnemyStats : MonoBehaviour
             Destroy(gameObject.GetComponent<Rigidbody>());
             Destroy(gameObject.GetComponent<EnemyAI>());
             Destroy(gameObject.GetComponent<LineRenderer>());
-            gameObject.GetComponent<CapsuleCollider>().isTrigger = true;
+            //gameObject.GetComponent<CapsuleCollider>().isTrigger = true;
+            foreach (var col in enemyColliders)
+            {
+                col.isTrigger = true;
+            }
             gameObject.GetComponent<Animator>().enabled = false;
             temp = gameObject.transform.Find("minimapIcon").gameObject;
             temp.SetActive(false);

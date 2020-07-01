@@ -19,6 +19,7 @@ public class EnemyAI : MonoBehaviour
     private float enemyHealth;
     private float angle;
     private AudioSource enemyAudioSource;
+    private float enemyShootForce = 100f;
 
     public GameObject GetPlayer()
     {
@@ -44,10 +45,14 @@ public class EnemyAI : MonoBehaviour
                 enemyShootTrace = gameObject.AddComponent<LineRenderer>();
             }            
             enemyShootTrace.startWidth = 0.015f;
-            enemyShootTrace.material.color = Color.red;
+            enemyShootTrace.material.color = Color.red;            
             enemyShootTrace.SetPosition(0, gunEnemy.transform.position);
             enemyShootTrace.SetPosition(1, hit.point);
             StartCoroutine("EnemyShootTraceRemove");
+            if (hit.collider.gameObject.GetComponent<Rigidbody>() != null)
+            {
+                hit.collider.gameObject.GetComponent<Rigidbody>().AddForce(dir * enemyShootForce);
+            }
             var temp = Instantiate(bulletHole, hit.point, Quaternion.identity);
             temp.transform.SetParent(hit.collider.transform);
             Destroy(temp, 1f);
