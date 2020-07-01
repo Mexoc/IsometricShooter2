@@ -54,6 +54,7 @@ TagManager:
   - ElevatorPanel
   - ElevatorDoor
   - LifeCount
+  - EnemyHealthBar
   layers:
   - Default
   - TransparentFX
