@@ -32,7 +32,7 @@ public class ToggleObjectiveMission1 : MonoBehaviour
 
     private bool HasPlayerKeycard()
     {
-        if (player.GetComponent<PlayerStats>().isKeycardLooted)
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>().isKeycardLooted)
         {
             return true;
         }
@@ -57,18 +57,19 @@ public class ToggleObjectiveMission1 : MonoBehaviour
     {        
         if (SceneManager.GetActiveScene().buildIndex == 1)
         {
-            isElevatorDoorOpen = GameObject.FindGameObjectWithTag("ElevatorDoor").GetComponent<ElevatorDoorStats>().isDoorOpen;
-            if (HasPlayerKeycard() && isElevatorDoorOpen)
+            isElevatorDoorOpen = GameObject.FindGameObjectWithTag("ElevatorDoor").GetComponent<ElevatorDoorStats>().isDoorOpen;            
+            if (!HasPlayerKeycard())
             {
-                objectiveText.text = "Зайдите в лифт";
-            }
-            else if (!HasPlayerKeycard())
-            {
-                objectiveText.text = "Подберите ключ-карту с одного из наёмников";
+                objectiveText.text = "Уничтожайте наёмников, пока из одного из них не выпадет ключ-карта. Подберите её";
             }
             else
             {
-                objectiveText.text = "Используйте ключ-карту на пульте управления лифтом";
+                if (HasPlayerKeycard() && isElevatorDoorOpen)
+                {
+                    objectiveText.text = "Зайдите в лифт";
+                }
+                else
+                    objectiveText.text = "Используйте ключ-карту на пульте управления лифтом";
             }
         }
         else if (SceneManager.GetActiveScene().buildIndex == 2)

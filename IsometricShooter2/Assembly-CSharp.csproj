@@ -76,6 +76,7 @@
     <Compile Include="Assets\Scripts\Characters\Player\PlayerLifeCount.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\PlayerShoot.cs" />
+    <Compile Include="Assets\Scripts\Characters\Player\PlayerStaticStats.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\PlayerTurn.cs" />
     <Compile Include="Assets\Scripts\Items\ElevatorDoorStats.cs" />

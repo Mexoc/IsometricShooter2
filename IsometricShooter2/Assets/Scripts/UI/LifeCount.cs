@@ -32,9 +32,9 @@ public class LifeCount : MonoBehaviour
     {
         if (player.GetComponent<PlayerStats>().isPlayerDead == false && player.transform.position.y < -5)
         {
-            yield return new WaitForSeconds(2f);
-            ReloadCurrentScene();
-            PlayerLifeCount.playerLife--;
+            player.transform.position = new Vector3(player.transform.position.x, 2, player.transform.position.z);
+            //yield return new WaitForSeconds(2f);            
+            //PlayerLifeCount.playerLife--;
         }
         if (player.GetComponent<PlayerStats>().isPlayerDead)
         {            

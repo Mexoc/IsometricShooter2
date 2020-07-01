@@ -9,7 +9,7 @@ public class KeycardLoot : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        collision.gameObject.GetComponent<PlayerStats>().isKeycardLooted = true;
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>().isKeycardLooted = true;
         Destroy(gameObject);                  
     }
 }

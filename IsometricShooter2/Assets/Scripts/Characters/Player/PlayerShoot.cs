@@ -7,7 +7,6 @@ public class PlayerShoot : MonoBehaviour
 {
     private GameObject player;
     public bool isPlayerShooting;
-    public bool canPlayerShoot;
     public GameObject shootingResult;
     private GameObject playerGunBarrel;
     private Vector3 collisionPoint;
@@ -19,6 +18,7 @@ public class PlayerShoot : MonoBehaviour
     private LineRenderer bulletTraceLine;
     private AudioSource audioSource;
     private float shootForce = 10f;
+    private Canvas canvas;
 
     private void Awake()
     {
@@ -26,7 +26,7 @@ public class PlayerShoot : MonoBehaviour
         audioSource = gameObject.GetComponent<AudioSource>();
         maxAmmo = 9;
         bulletCount = maxAmmo;
-        
+        canvas = GameObject.FindObjectOfType<Canvas>();
     }
 
     void Update()
@@ -37,28 +37,17 @@ public class PlayerShoot : MonoBehaviour
 
     private void PlayerShooting()
     {
-        if (playerGunBarrel == null)
-        {
-            playerGunBarrel = GameObject.FindGameObjectWithTag("GunBarrel");
-        }
-        if (playerMoveComponent == null)
-        {
-            playerMoveComponent = gameObject.GetComponent<PlayerMovement>();
-        }
-        if (bulletTraceLine == null)
-        {
-            bulletTraceLine = gameObject.AddComponent<LineRenderer>();
-            bulletTraceLine.startColor = Color.blue;
-            bulletTraceLine.endColor = Color.blue;
-            bulletTraceLine.material.color = Color.blue;
-            bulletTraceLine.startWidth = 0.015f;
-        }
+        SetShootingComponents();        
         if (Input.GetMouseButtonDown(0) && playerMoveComponent.isVerticalMove || playerMoveComponent.isHorizontalMove || playerMoveComponent.isSprint)
             return;
-        canPlayerShoot = player.GetComponent<PlayerStats>().CanPlayerShoot;
-        if (canPlayerShoot)
+        if (Input.GetMouseButtonDown(0))
         {
-            if (Input.GetMouseButtonDown(0))
+            if (canvas.GetComponent<CursorOverUICheck>().CursorRaycastingUI() == true)
+            {
+                isPlayerShooting = false;
+                return;
+            }
+            else
             {
                 isPlayerShooting = true;                
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -102,10 +91,6 @@ public class PlayerShoot : MonoBehaviour
                     }
                 }
             }
-            else
-            {
-                isPlayerShooting = false;
-            }
         }
         else return;
     }
@@ -125,11 +110,11 @@ public class PlayerShoot : MonoBehaviour
         }
         if (bulletCount == 0)
         {
-            canPlayerShoot = false;
+            player.GetComponent<PlayerStats>().CanPlayerShoot = false;
         }
         else
         {
-            canPlayerShoot = true;
+            player.GetComponent<PlayerStats>().CanPlayerShoot = true;
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -150,5 +135,25 @@ public class PlayerShoot : MonoBehaviour
     {
         yield return new WaitForSeconds(0.05f);
         Destroy(gameObject.GetComponent<LineRenderer>());
+    }
+
+    private void SetShootingComponents()
+    {
+        if (playerGunBarrel == null)
+        {
+            playerGunBarrel = GameObject.FindGameObjectWithTag("GunBarrel");
+        }
+        if (playerMoveComponent == null)
+        {
+            playerMoveComponent = gameObject.GetComponent<PlayerMovement>();
+        }
+        if (bulletTraceLine == null)
+        {
+            bulletTraceLine = gameObject.AddComponent<LineRenderer>();
+            bulletTraceLine.startColor = Color.blue;
+            bulletTraceLine.endColor = Color.blue;
+            bulletTraceLine.material.color = Color.blue;
+            bulletTraceLine.startWidth = 0.015f;
+        }
     }
 }

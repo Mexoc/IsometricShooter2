@@ -24,7 +24,7 @@ public class CursorOverUICheck : MonoBehaviour
         CursorShootLockUI();
     }
 
-    private bool CursorRaycastingUI()
+    public bool CursorRaycastingUI()
     {
         pointerEventData = new PointerEventData(eventSystem);
         pointerEventData.position = Input.mousePosition;

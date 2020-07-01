@@ -29,7 +29,7 @@ public class EnemyPatrol : EnemyBaseFSM
         direction.y = 0;
         enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, Quaternion.LookRotation(direction), rotSpeed * Time.deltaTime);
         enemy.transform.Translate(0, 0, speed * Time.deltaTime);
-        if (Vector3.Distance(enemy.transform.position, waypoints[currentWaypoint].transform.position) < 3f)
+        if (Vector3.Distance(enemy.transform.position, waypoints[currentWaypoint].transform.position) < 2f)
         {
             currentWaypoint++;
         }        
@@ -68,7 +68,7 @@ public class EnemyPatrol : EnemyBaseFSM
             {
                 GameObject waypoint = new GameObject();
                 waypoint.name = "waypoint" + (i + 1);
-                waypoint.transform.position = enemy.transform.position;
+                waypoint.transform.position = GameObject.FindGameObjectWithTag("Player").transform.position;
                 if (index == 0)
                 {
                     waypoint.tag = "Waypoint";

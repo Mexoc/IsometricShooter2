@@ -17,7 +17,7 @@ public class MapToggle : MonoBehaviour
 
     void Start()
     {
-        map.SetActive(false);
+        map.SetActive(false);        
     }
 
     void Update()
@@ -41,19 +41,9 @@ public class MapToggle : MonoBehaviour
 
     private void MiniMapIconsLook()
     {
-        if (map.activeSelf == false)
+        foreach (GameObject obj in minimapIcons)
         {
-            foreach (GameObject obj in minimapIcons)
-            {
-                obj.transform.LookAt(minimapCamera.transform);
-            }
-        }
-        else
-        {
-            foreach (GameObject obj in minimapIcons)
-            {
-                obj.transform.LookAt(gameObject.transform);
-            }
+            obj.transform.LookAt(gameObject.transform);
         }
     }
 }
